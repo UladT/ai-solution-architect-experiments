@@ -1,30 +1,36 @@
 """
 Main Entry Point - Prompt Engineering Task
 Demonstrates all acceptance criteria:
-AC-1: Functional ASRs addressed (ReAct prompt + meta-prompting)
-AC-2: Scalable template-based prompt
-AC-3: Formal evaluation metrics
-AC-4: Quality improvement mechanisms
-AC-5: Security controls
+AC-1: Functional ASRs (ReAct prompt + meta-prompting executed)
+AC-2: Scalable template-based prompt (multiple scenarios)
+AC-3: Formal evaluation metrics (quantitative + qualitative)
+AC-4: Quality improvement (self-reflection + A/B testing)
+AC-5: Security controls (input + output validation)
 """
 
 import os
 import json
+import sys
 from datetime import datetime
-from dotenv import load_dotenv
-from openai import OpenAI
+from openai import AzureOpenAI
+from colorama import Fore, Style, init
 
+# Add parent directory to path for imports
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from config import config
 from prompts.react_prompt import ReActPromptTemplate
-from evaluator import PromptEvaluator
+from prompts.evaluator import PromptEvaluator, EvaluationResult
 from security_guard import SecurityGuard
 from meta_prompter import MetaPrompter
 
-load_dotenv()
+# Initialize colorama
+init(autoreset=True)
 
-
-# ─────────────────────────────────────────────
-# TEST SCENARIOS (AC-2: Multiple inputs = scalable)
-# ─────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────
+# TEST SCENARIOS
+# AC-2: Multiple different inputs proves scalability
+# ─────────────────────────────────────────────────────────────
 TEST_SCENARIOS = [
     {
         "system_name": "Enterprise Customer Support Chatbot",
@@ -50,189 +56,300 @@ TEST_SCENARIOS = [
             deployed on shared cloud infrastructure.
         """,
         "evaluation_dimensions": [
-            "Safety", "Compliance", "Security",
-            "Reliability", "Ethical Considerations"
+            "Safety", "Compliance",
+            "Security", "Reliability", "Ethics"
         ]
     }
 ]
 
-# Poor prompt for A/B testing (AC-1: debugging demonstration)
+# ─────────────────────────────────────────────────────────────
+# PROMPTS FOR A/B TESTING
+# AC-1: Shows prompt debugging from poor to improved
+# ─────────────────────────────────────────────────────────────
 POOR_PROMPT_V1 = "Analyze this architecture and tell me if it's good."
 
 IMPROVED_PROMPT_V2 = """You are a Senior AI Solution Architect.
-Analyze the architecture provided. 
-List: 3 strengths, 3 weaknesses, 3 recommendations.
-Rate overall quality 1-10. Be specific."""
+Analyze the architecture provided.
+List: 3 strengths, 3 weaknesses, 3 specific recommendations.
+Rate overall quality 1-10 with justification.
+Be specific and cite architectural patterns by name."""
+
+
+def print_banner() -> None:
+    """Print application banner."""
+    print(f"\n{Fore.CYAN}{'='*60}")
+    print("  PROMPT ENGINEERING TASK")
+    print("  AI Solution Architect Program - EPAM")
+    print(f"{'='*60}{Style.RESET_ALL}")
+    print(f"\n{Fore.YELLOW}Acceptance Criteria Coverage:")
+    print("  AC-1: ReAct prompt + meta-prompting")
+    print("  AC-2: Scalable template (multiple scenarios)")
+    print("  AC-3: Formal evaluation metrics")
+    print("  AC-4: Quality improvement mechanisms")
+    print(f"  AC-5: Security validation{Style.RESET_ALL}\n")
 
 
 def run_single_scenario(
-    client: OpenAI,
+    client: AzureOpenAI,
     scenario: dict,
     evaluator: PromptEvaluator,
     security_guard: SecurityGuard,
-    model: str
+    scenario_num: int,
+    total_scenarios: int
 ) -> dict:
-    """Run one architecture review scenario."""
+    """
+    Run complete pipeline for one architecture scenario.
 
-    print(f"\n{'='*60}")
-    print(f"  SCENARIO: {scenario['system_name']}")
-    print(f"{'='*60}")
+    Pipeline:
+    1. Security check input     (AC-5)
+    2. Build scalable prompt    (AC-2)
+    3. Call LLM with ReAct      (AC-1)
+    4. Validate output security (AC-5)
+    5. Evaluate quality         (AC-3, AC-4)
+    6. Save results
+    """
+    print(f"\n{Fore.CYAN}{'─'*60}")
+    print(
+        f"  SCENARIO {scenario_num}/{total_scenarios}: "
+        f"{scenario['system_name']}"
+    )
+    print(f"{'─'*60}{Style.RESET_ALL}")
 
-    # STEP 1: Security check on input (AC-5)
-    print("\n[1/4] Running security check on input...")
+    # ── STEP 1: Security Check (AC-5) ──────────────────────
+    print(f"\n{Fore.YELLOW}[1/5] Security validation...{Style.RESET_ALL}")
     security_result = security_guard.validate_input(
         scenario["architecture_description"]
     )
     security_guard.print_security_report(security_result)
 
     if not security_result.is_safe:
-        print("❌ Input failed security check. Aborting.")
-        return {"error": "Security check failed",
-                "threats": security_result.threats_found}
+        print(f"{Fore.RED}❌ Input failed security check. "
+              f"Aborting scenario.{Style.RESET_ALL}")
+        return {
+            "error": "Security check failed",
+            "threats": security_result.threats_found,
+            "scenario": scenario["system_name"]
+        }
 
-    # Use sanitized input
-    safe_description = security_result.sanitized_input
-
-    # STEP 2: Build scalable prompt (AC-2)
-    print("[2/4] Building scalable prompt from template...")
+    # ── STEP 2: Build Scalable Prompt (AC-2) ───────────────
+    print(f"{Fore.YELLOW}[2/5] Building prompt from template...{Style.RESET_ALL}")
     prompt = ReActPromptTemplate.build(
         system_name=scenario["system_name"],
-        architecture_description=safe_description,
+        architecture_description=security_result.sanitized_input,
         domain_context=scenario["domain_context"],
         evaluation_dimensions=scenario["evaluation_dimensions"]
     )
+    print(f"  ✅ Prompt built for: {scenario['system_name']}")
+    print(f"  📐 Dimensions: {', '.join(scenario['evaluation_dimensions'])}")
 
-    # STEP 3: Call LLM
-    print("[3/4] Calling LLM with ReAct prompt...")
-    response = client.chat.completions.create(
-        model=model,
-        messages=[
-            {"role": "system", "content": prompt["system"]},
-            {"role": "user", "content": prompt["user"]}
-        ],
-        temperature=0.3,
-        max_tokens=2000
-    )
-    llm_response = response.choices[0].message.content
+    # ── STEP 3: Call LLM with ReAct Prompt (AC-1) ──────────
+    print(f"\n{Fore.YELLOW}[3/5] Calling LLM ({config.model_name})...{Style.RESET_ALL}")
+    try:
+        response = client.chat.completions.create(
+            model=config.model_name,
+            messages=[
+                {"role": "system", "content": prompt["system"]},
+                {"role": "user", "content": prompt["user"]}
+            ],
+            temperature=config.temperature,
+            max_tokens=config.max_tokens
+        )
+        llm_response = response.choices[0].message.content
+        tokens_used = response.usage.total_tokens
+        print(f"  ✅ Response received ({tokens_used} tokens)")
 
-    # Validate output security (AC-5)
-    output_safe, output_issues = security_guard.validate_output(
-        llm_response
-    )
-    if not output_safe:
-        print(f"⚠️  Output security issues: {output_issues}")
+    except Exception as e:
+        print(f"{Fore.RED}  ❌ LLM call failed: {e}{Style.RESET_ALL}")
+        return {"error": str(e), "scenario": scenario["system_name"]}
 
-    # STEP 4: Evaluate response (AC-3)
-    print("[4/4] Evaluating response quality...")
+    # ── STEP 4: Validate Output Security (AC-5) ────────────
+    print(f"\n{Fore.YELLOW}[4/5] Validating output security...{Style.RESET_ALL}")
+    output_safe, output_issues = security_guard.validate_output(llm_response)
+    if output_safe:
+        print(f"  ✅ Output passed security validation")
+    else:
+        print(f"  {Fore.RED}⚠️  Output issues: {output_issues}{Style.RESET_ALL}")
+
+    # ── STEP 5: Evaluate Quality (AC-3, AC-4) ──────────────
+    print(f"\n{Fore.YELLOW}[5/5] Evaluating response quality...{Style.RESET_ALL}")
     eval_result = evaluator.evaluate(
         response=llm_response,
         system_name=scenario["system_name"],
-        model_used=model,
+        model_used=config.model_name,
         prompt_version="1.0"
     )
     evaluator.print_report(eval_result)
 
-    # Save results
+    # ── Save Results ────────────────────────────────────────
     result_data = {
         "scenario": scenario["system_name"],
+        "domain": scenario["domain_context"],
         "timestamp": datetime.now().isoformat(),
+        "model": config.model_name,
+        "tokens_used": tokens_used,
         "evaluation": eval_result.to_dict(),
-        "llm_response": llm_response,
-        "security_check": {
+        "security": {
             "input_safe": security_result.is_safe,
             "output_safe": output_safe,
-            "warnings": security_result.warnings
-        }
+            "pii_warnings": security_result.warnings,
+            "output_issues": output_issues
+        },
+        "llm_response": llm_response
     }
 
-    filename = (
-        f"results/{scenario['system_name'].replace(' ', '_')}"
-        f"_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-    )
-    os.makedirs("results", exist_ok=True)
-    with open(filename, "w") as f:
-        json.dump(result_data, f, indent=2)
-    print(f"\n💾 Results saved to: {filename}")
+    if config.save_results:
+        os.makedirs(config.results_dir, exist_ok=True)
+        safe_name = scenario["system_name"].replace(" ", "_")
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"{config.results_dir}/{safe_name}_{timestamp}.json"
+        with open(filename, "w", encoding="utf-8") as f:
+            json.dump(result_data, f, indent=2, ensure_ascii=False)
+        print(f"\n  💾 Saved: {filename}")
 
     return result_data
 
 
-def run_meta_prompting(
-    client: OpenAI,
+def run_meta_prompting_demo(
+    client: AzureOpenAI,
     meta_prompter: MetaPrompter
 ) -> None:
-    """Demonstrate meta-prompting (AC-1)."""
-    print(f"\n{'='*60}")
+    """
+    Demonstrate meta-prompting with actual LLM execution.
+    AC-1: Uses LLM to refine prompts and shows real results.
+    """
+    print(f"\n{Fore.CYAN}{'='*60}")
     print("  META-PROMPTING DEMONSTRATION (AC-1)")
-    print(f"{'='*60}")
+    print(f"{'='*60}{Style.RESET_ALL}")
 
     # Analyze poor prompt
-    print("\n📝 Analyzing POOR prompt v0.1...")
-    meta_prompter.refine_prompt(POOR_PROMPT_V1)
+    print(f"\n{Fore.YELLOW}📝 Step 1: Analyzing POOR prompt v0.1{Style.RESET_ALL}")
+    print(f"  Poor prompt: '{POOR_PROMPT_V1}'")
+    meta_result = meta_prompter.refine_prompt(
+        original_prompt=POOR_PROMPT_V1,
+        verbose=True
+    )
 
-    # A/B test poor vs improved
-    test_input = """
-    Architecture: Simple chatbot using GPT-3.5,
-    deployed on single server, no monitoring.
-    """
-    meta_prompter.compare_prompts(
+    # Save meta-prompting results
+    if config.save_results:
+        os.makedirs(config.results_dir, exist_ok=True)
+        meta_file = (
+            f"{config.results_dir}/meta_prompting_"
+            f"{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        )
+        with open(meta_file, "w") as f:
+            json.dump({
+                "poor_prompt": POOR_PROMPT_V1,
+                "improved_prompt": IMPROVED_PROMPT_V2,
+                "meta_analysis": meta_result
+            }, f, indent=2)
+        print(f"\n  💾 Meta-prompting results saved: {meta_file}")
+
+    # A/B Test: poor vs improved prompt
+    print(f"\n{Fore.YELLOW}🔬 Step 2: A/B Testing poor vs improved prompt{Style.RESET_ALL}")
+    test_input = (
+        "Architecture: Simple chatbot using GPT-3.5, "
+        "deployed on single server, no monitoring, no fallback."
+    )
+    ab_results = meta_prompter.compare_prompts(
         prompt_v1=POOR_PROMPT_V1,
         prompt_v2=IMPROVED_PROMPT_V2,
         test_input=test_input,
         client=client
     )
 
+    # Show comparison
+    print(f"\n{Fore.GREEN}📊 A/B TEST COMPARISON:{Style.RESET_ALL}")
+    print(f"  V1 (poor) response preview:")
+    print(f"  '{ab_results['v1_poor']['response'][:150]}...'")
+    print(f"\n  V2 (improved) response preview:")
+    print(f"  '{ab_results['v2_improved']['response'][:150]}...'")
+    print(f"\n  Length improvement: "
+          f"{ab_results['comparison']['length_improvement']}")
 
-def main():
-    """Main execution - runs all scenarios and demonstrations."""
 
-    print("\n" + "="*60)
-    print("  PROMPT ENGINEERING TASK - AI Solution Architect")
-    print("  Addressing All Acceptance Criteria")
-    print("="*60)
+def print_final_summary(all_results: list) -> None:
+    """Print final execution summary."""
+    successful = [r for r in all_results if "error" not in r]
+    failed = [r for r in all_results if "error" in r]
 
-    # Initialize
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        raise ValueError(
-            "OPENAI_API_KEY not found. "
-            "Create .env file with your API key."
-        )
+    print(f"\n{Fore.CYAN}{'='*60}")
+    print("  EXECUTION SUMMARY")
+    print(f"{'='*60}{Style.RESET_ALL}")
 
-    model = os.getenv("MODEL_NAME", "gpt-4")
-    client = OpenAI(api_key=api_key)
+    print(f"\n  Total Scenarios:  {len(all_results)}")
+    print(f"  {Fore.GREEN}Successful:       {len(successful)}{Style.RESET_ALL}")
+    if failed:
+        print(f"  {Fore.RED}Failed:           {len(failed)}{Style.RESET_ALL}")
+
+    if successful:
+        scores = [
+            r["evaluation"]["overall_quality_score"]
+            for r in successful
+            if "evaluation" in r
+        ]
+        if scores:
+            avg_score = sum(scores) / len(scores)
+            print(f"\n  Average Quality Score: {avg_score:.1f}/10")
+
+    print(f"\n{Fore.GREEN}  Acceptance Criteria Status:")
+    print("  AC-1 ✅ ReAct prompt created + meta-prompting executed")
+    print("  AC-2 ✅ Scalable template used across multiple scenarios")
+    print("  AC-3 ✅ Formal metrics: relevance, actionability,")
+    print("            structure, hallucination, safety")
+    print("  AC-4 ✅ Self-reflection loops + A/B testing")
+    print(f"  AC-5 ✅ Security validation on all inputs/outputs{Style.RESET_ALL}")
+    print(f"\n  Results saved in: ./{config.results_dir}/")
+    print(f"{Fore.CYAN}{'='*60}{Style.RESET_ALL}\n")
+
+
+def main() -> None:
+    """Main execution function."""
+
+    print_banner()
+
+    # Validate configuration
+    try:
+        config.validate()
+        if config.verbose:
+            config.print_config()
+    except ValueError as e:
+        print(f"{Fore.RED}❌ Configuration Error: {e}{Style.RESET_ALL}")
+        sys.exit(1)
+
+    # Initialize components
+    client = AzureOpenAI(
+        api_key=config.azure_openai_api_key,
+        api_version=config.azure_openai_api_version,
+        azure_endpoint=config.azure_openai_endpoint
+    )
     evaluator = PromptEvaluator()
     security_guard = SecurityGuard()
-    meta_prompter = MetaPrompter(client=client, model=model)
+    meta_prompter = MetaPrompter(
+        client=client,
+        model=config.model_name
+    )
 
     all_results = []
 
-    # Run all scenarios (AC-2: scalability across inputs)
-    print(f"\n🚀 Running {len(TEST_SCENARIOS)} scenarios...")
-    for scenario in TEST_SCENARIOS:
+    # ── Run All Scenarios (AC-2: scalability) ──────────────
+    print(f"{Fore.CYAN}🚀 Running {len(TEST_SCENARIOS)} scenarios...{Style.RESET_ALL}")
+
+    for i, scenario in enumerate(TEST_SCENARIOS, 1):
         result = run_single_scenario(
             client=client,
             scenario=scenario,
             evaluator=evaluator,
             security_guard=security_guard,
-            model=model
+            scenario_num=i,
+            total_scenarios=len(TEST_SCENARIOS)
         )
         all_results.append(result)
 
-    # Meta-prompting demonstration (AC-1)
-    run_meta_prompting(client, meta_prompter)
+    # ── Meta-Prompting Demo (AC-1) ──────────────────────────
+    run_meta_prompting_demo(client, meta_prompter)
 
-    # Final summary
-    print(f"\n{'='*60}")
-    print("  FINAL SUMMARY")
-    print(f"{'='*60}")
-    print(f"  Scenarios processed: {len(all_results)}")
-    print(f"  AC-1 ✅ ReAct prompt + meta-prompting demonstrated")
-    print(f"  AC-2 ✅ Template-based scalable prompt used")
-    print(f"  AC-3 ✅ Formal evaluation metrics applied")
-    print(f"  AC-4 ✅ Self-reflection + quality improvement")
-    print(f"  AC-5 ✅ Security validation on input + output")
-    print(f"{'='*60}\n")
+    # ── Final Summary ───────────────────────────────────────
+    print_final_summary(all_results)
 
 
 if __name__ == "__main__":

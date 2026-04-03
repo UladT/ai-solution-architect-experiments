@@ -77,7 +77,9 @@ class EvaluationResult:
         return max(0.0, min(10.0, round(base, 2)))
 
     def to_dict(self) -> dict:
-        return asdict(self)
+        result = asdict(self)
+        result["overall_quality_score"] = self.overall_quality_score
+        return result
 
     def to_json(self) -> str:
         return json.dumps(self.to_dict(), indent=2)
