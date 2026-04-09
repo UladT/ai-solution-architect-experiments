@@ -1,0 +1,33 @@
+{
+  "avg_precision_at_k": 0.8,
+  "avg_recall_at_k": 1.0,
+  "avg_extraction_f1": 0.257,
+  "avg_faithfulness_score": 10.0,
+  "security_tests": "5/5",
+  "details": {
+    "precision_scores": [
+      1.0,
+      1.0,
+      0.667,
+      0.667,
+      0.667
+    ],
+    "recall_scores": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "extraction_f1_scores": [
+      0.476,
+      0.19,
+      0.105
+    ],
+    "faithfulness_scores": [
+      10.0,
+      10.0,
+      10.0
+    ]
+  }
+}
