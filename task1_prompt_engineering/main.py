@@ -24,6 +24,7 @@ from prompts.evaluator import PromptEvaluator, EvaluationResult
 from security_guard import SecurityGuard
 from meta_prompter import MetaPrompter
 
+from prompt_saver import save_prompt_artifact, save_prompt_evolution
 # Initialize colorama
 init(autoreset=True)
 
@@ -142,6 +143,26 @@ def run_single_scenario(
     print(f"  ✅ Prompt built for: {scenario['system_name']}")
     print(f"  📐 Dimensions: {', '.join(scenario['evaluation_dimensions'])}")
 
+    # Save the ReAct prompts if configured
+    prompt_paths = {}
+    if config.save_results:
+        system_file = save_prompt_artifact(
+            prompt_text=prompt["system"],
+            prompt_name="react_system",
+            version="1.0",
+            scenario_name=scenario["system_name"],
+            results_dir=config.results_dir
+        )
+        user_file = save_prompt_artifact(
+            prompt_text=prompt["user"],
+            prompt_name="react_user",
+            version="1.0",
+            scenario_name=scenario["system_name"],
+            results_dir=config.results_dir
+        )
+        prompt_paths["system"] = system_file
+        prompt_paths["user"] = user_file
+        print(f"  📄 Prompts saved: {system_file}")
     # ── STEP 3: Call LLM with ReAct Prompt (AC-1) ──────────
     print(f"\n{Fore.YELLOW}[3/5] Calling LLM ({config.model_name})...{Style.RESET_ALL}")
     try:
@@ -194,7 +215,8 @@ def run_single_scenario(
             "pii_warnings": security_result.warnings,
             "output_issues": output_issues
         },
-        "llm_response": llm_response
+        "llm_response": llm_response,
+        "prompt_artifact_paths": prompt_paths
     }
 
     if config.save_results:
@@ -229,6 +251,36 @@ def run_meta_prompting_demo(
         verbose=True
     )
 
+    # Save prompt versions and evolution document
+    if config.save_results:
+        print(f"\n{Fore.CYAN}💾 Saving prompt versions and evolution...{Style.RESET_ALL}")
+        
+        # Save v0.1 poor prompt
+        poor_file = save_prompt_artifact(
+            prompt_text=POOR_PROMPT_V1,
+            prompt_name="baseline_poor",
+            version="0.1",
+            results_dir=config.results_dir
+        )
+        print(f"  ✅ Poor prompt v0.1: {poor_file}")
+        
+        # Save v1.0 improved prompt
+        improved_file = save_prompt_artifact(
+            prompt_text=IMPROVED_PROMPT_V2,
+            prompt_name="enhanced",
+            version="1.0",
+            results_dir=config.results_dir
+        )
+        print(f"  ✅ Improved prompt v1.0: {improved_file}")
+        
+        # Save comprehensive evolution markdown report
+        evolution_file = save_prompt_evolution(
+            poor_prompt=POOR_PROMPT_V1,
+            improved_prompt=IMPROVED_PROMPT_V2,
+            meta_analysis=meta_result,
+            results_dir=config.results_dir
+        )
+        print(f"  ✅ Evolution report: {evolution_file}")
     # Save meta-prompting results
     if config.save_results:
         os.makedirs(config.results_dir, exist_ok=True)
