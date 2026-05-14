@@ -1,5 +1,5 @@
 # ai-solution-architect-experiments
-EPAM AI Solution Architect Program - Practical Tasks
+AI Solution Architect Program - Practical Tasks
 # AI Solution Architect - Practical Tasks
 
 ## Task 1: Prompt Engineering

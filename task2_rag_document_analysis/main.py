@@ -158,6 +158,18 @@ def run(csv_path: str = "", max_docs: int = 0) -> None:
     _ok(f"Split into {len(chunks)} text chunks "
         f"(size={config.chunk_size}, overlap={config.chunk_overlap})")
 
+    # Save chunking decisions report
+    chunk_report = loader.build_chunking_report(
+        documents, chunks, config.chunk_size, config.chunk_overlap
+    )
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    chunk_report_path = os.path.join(
+        config.results_dir, f"chunking_report_{timestamp}.json"
+    )
+    with open(chunk_report_path, "w", encoding="utf-8") as _f:
+        json.dump(chunk_report, _f, indent=2)
+    _info(f"Chunking report saved → {chunk_report_path}")
+
     # ═════════════════════════════════════════════════════════════════════════
     # STEP 2: Build / Update FAISS Index
     # AC-2: Scalable — incremental add without full rebuild.

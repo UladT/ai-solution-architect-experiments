@@ -354,6 +354,85 @@ class DocumentLoader:
         return chunks
 
     @staticmethod
+    def build_chunking_report(
+        documents: List[ResumeDocument],
+        chunks: List[Dict],
+        chunk_size: int,
+        chunk_overlap: int,
+    ) -> Dict:
+        """
+        Build a structured report describing the chunking decisions made.
+
+        Captures:
+          - Strategy rationale and parameter values
+          - Per-document chunk counts and text lengths
+          - Global statistics (mean/min/max chunks per doc, total tokens est.)
+
+        Returns:
+            A dict ready for JSON serialisation.
+        """
+        from datetime import datetime
+
+        # Group chunk counts per document
+        per_doc: Dict[str, Dict] = {}
+        for chunk in chunks:
+            cid = chunk["metadata"].get("doc_id", "unknown")
+            if cid not in per_doc:
+                per_doc[cid] = {
+                    "doc_id": cid,
+                    "category": chunk["metadata"].get("category", "?"),
+                    "chunk_count": 0,
+                    "chunk_lengths": [],
+                }
+            per_doc[cid]["chunk_count"] += 1
+            per_doc[cid]["chunk_lengths"].append(len(chunk["page_content"]))
+
+        doc_lengths = [len(d.text) for d in documents]
+        counts = [v["chunk_count"] for v in per_doc.values()]
+        effective_step = chunk_size - chunk_overlap
+
+        report = {
+            "generated_at": datetime.now().isoformat(),
+            "strategy": "fixed-size sliding window with overlap",
+            "rationale": (
+                "Fixed-size chunks ensure predictable embedding cost and latency. "
+                "Overlap preserves context at split boundaries so skill lists "
+                "or job titles that straddle two chunks appear in both vectors, "
+                "improving retrieval recall."
+            ),
+            "parameters": {
+                "chunk_size_chars": chunk_size,
+                "chunk_overlap_chars": chunk_overlap,
+                "effective_step_chars": effective_step,
+                "approx_tokens_per_chunk": round(chunk_size / 4),
+                "approx_overlap_tokens": round(chunk_overlap / 4),
+            },
+            "tradeoffs": {
+                "chunk_size_too_small": "More vectors, cheaper per-query but context fragmented",
+                "chunk_size_too_large": "Fewer vectors, semantic dilution hurts precision",
+                "overlap_too_low": "Boundary artefacts — terms split across chunks are missed",
+                "overlap_too_high": "Redundant vectors inflate index size",
+                "chosen_rationale": (
+                    f"{chunk_size} chars (~{round(chunk_size/4)} tokens) chosen to capture "
+                    "a full skills block or experience entry in one chunk; "
+                    f"{chunk_overlap} char overlap covers ~1-2 resume lines for continuity."
+                ),
+            },
+            "corpus_summary": {
+                "total_documents": len(documents),
+                "total_chunks": len(chunks),
+                "avg_doc_length_chars": round(sum(doc_lengths) / len(doc_lengths)) if doc_lengths else 0,
+                "min_doc_length_chars": min(doc_lengths) if doc_lengths else 0,
+                "max_doc_length_chars": max(doc_lengths) if doc_lengths else 0,
+                "avg_chunks_per_doc": round(sum(counts) / len(counts), 2) if counts else 0,
+                "min_chunks_per_doc": min(counts) if counts else 0,
+                "max_chunks_per_doc": max(counts) if counts else 0,
+            },
+            "per_document": list(per_doc.values()),
+        }
+        return report
+
+    @staticmethod
     def get_category_stats(documents: List[ResumeDocument]) -> Dict[str, int]:
         """Count documents per category."""
         stats: Dict[str, int] = {}

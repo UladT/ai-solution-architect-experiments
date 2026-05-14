@@ -1,0 +1,3213 @@
+{
+  "generated_at": "2026-04-17T11:54:54.692942",
+  "strategy": "fixed-size sliding window with overlap",
+  "rationale": "Fixed-size chunks ensure predictable embedding cost and latency. Overlap preserves context at split boundaries so skill lists or job titles that straddle two chunks appear in both vectors, improving retrieval recall.",
+  "parameters": {
+    "chunk_size_chars": 800,
+    "chunk_overlap_chars": 100,
+    "effective_step_chars": 700,
+    "approx_tokens_per_chunk": 200,
+    "approx_overlap_tokens": 25
+  },
+  "tradeoffs": {
+    "chunk_size_too_small": "More vectors, cheaper per-query but context fragmented",
+    "chunk_size_too_large": "Fewer vectors, semantic dilution hurts precision",
+    "overlap_too_low": "Boundary artefacts \u2014 terms split across chunks are missed",
+    "overlap_too_high": "Redundant vectors inflate index size",
+    "chosen_rationale": "800 chars (~200 tokens) chosen to capture a full skills block or experience entry in one chunk; 100 char overlap covers ~1-2 resume lines for continuity."
+  },
+  "corpus_summary": {
+    "total_documents": 200,
+    "total_chunks": 1782,
+    "avg_doc_length_chars": 5980,
+    "min_doc_length_chars": 1560,
+    "max_doc_length_chars": 20626,
+    "avg_chunks_per_doc": 8.91,
+    "min_chunks_per_doc": 3,
+    "max_chunks_per_doc": 30
+  },
+  "per_document": [
+    {
+      "doc_id": "a491a1edfe64",
+      "category": "TEACHER",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        538
+      ]
+    },
+    {
+      "doc_id": "2203e838fcf8",
+      "category": "TEACHER",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        370
+      ]
+    },
+    {
+      "doc_id": "68874ca6b2dd",
+      "category": "TEACHER",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        283
+      ]
+    },
+    {
+      "doc_id": "4be6480f98c0",
+      "category": "TEACHER",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        111
+      ]
+    },
+    {
+      "doc_id": "338ca9529e2b",
+      "category": "TEACHER",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        250
+      ]
+    },
+    {
+      "doc_id": "14565a6adecb",
+      "category": "TEACHER",
+      "chunk_count": 13,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        359
+      ]
+    },
+    {
+      "doc_id": "f3942911a8bc",
+      "category": "TEACHER",
+      "chunk_count": 15,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        572
+      ]
+    },
+    {
+      "doc_id": "3d7a36cb1046",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        493
+      ]
+    },
+    {
+      "doc_id": "9984d7495f4b",
+      "category": "ADVOCATE",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        255
+      ]
+    },
+    {
+      "doc_id": "78d09162becd",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        783
+      ]
+    },
+    {
+      "doc_id": "632517a36dfc",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        401
+      ]
+    },
+    {
+      "doc_id": "8deebbf1a80d",
+      "category": "ADVOCATE",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        720
+      ]
+    },
+    {
+      "doc_id": "7c27af6a6bfb",
+      "category": "ADVOCATE",
+      "chunk_count": 4,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        624
+      ]
+    },
+    {
+      "doc_id": "9fbe7e6cac67",
+      "category": "ADVOCATE",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        429
+      ]
+    },
+    {
+      "doc_id": "49108df26094",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        647
+      ]
+    },
+    {
+      "doc_id": "255b5982c4e8",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        607
+      ]
+    },
+    {
+      "doc_id": "e46dca5e4628",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        573
+      ]
+    },
+    {
+      "doc_id": "fe6016b29e2a",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        393
+      ]
+    },
+    {
+      "doc_id": "0f640ba26350",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        456
+      ]
+    },
+    {
+      "doc_id": "71efccf9054b",
+      "category": "ADVOCATE",
+      "chunk_count": 5,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        313
+      ]
+    },
+    {
+      "doc_id": "963020885c0b",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        196
+      ]
+    },
+    {
+      "doc_id": "0b7feda9e725",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        730
+      ]
+    },
+    {
+      "doc_id": "cabda75abe31",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800
+      ]
+    },
+    {
+      "doc_id": "751195d174a4",
+      "category": "ADVOCATE",
+      "chunk_count": 6,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        279
+      ]
+    },
+    {
+      "doc_id": "9ef41f103ad5",
+      "category": "ADVOCATE",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        599
+      ]
+    },
+    {
+      "doc_id": "ebad8e69506f",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        465
+      ]
+    },
+    {
+      "doc_id": "07f359af817a",
+      "category": "ADVOCATE",
+      "chunk_count": 17,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        794
+      ]
+    },
+    {
+      "doc_id": "aa9602f51a1c",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        368
+      ]
+    },
+    {
+      "doc_id": "f5cf6431be61",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        781
+      ]
+    },
+    {
+      "doc_id": "f34215e7157e",
+      "category": "ADVOCATE",
+      "chunk_count": 5,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        623
+      ]
+    },
+    {
+      "doc_id": "d458bead7642",
+      "category": "ADVOCATE",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        263
+      ]
+    },
+    {
+      "doc_id": "a7ce12f5fa3a",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        573
+      ]
+    },
+    {
+      "doc_id": "7792f2c7d9b7",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        110
+      ]
+    },
+    {
+      "doc_id": "e7b0f9bfaa7f",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        230
+      ]
+    },
+    {
+      "doc_id": "81445b0f5320",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        616
+      ]
+    },
+    {
+      "doc_id": "ccab9d80315b",
+      "category": "ADVOCATE",
+      "chunk_count": 3,
+      "chunk_lengths": [
+        800,
+        800,
+        799
+      ]
+    },
+    {
+      "doc_id": "5f65ac36a49c",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        516
+      ]
+    },
+    {
+      "doc_id": "6f1d726315c1",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        642
+      ]
+    },
+    {
+      "doc_id": "4137e87a446f",
+      "category": "ADVOCATE",
+      "chunk_count": 19,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        556
+      ]
+    },
+    {
+      "doc_id": "2ae72fdf072d",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        601
+      ]
+    },
+    {
+      "doc_id": "54e009d3ed39",
+      "category": "ADVOCATE",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        684
+      ]
+    },
+    {
+      "doc_id": "93c5dde49790",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        588
+      ]
+    },
+    {
+      "doc_id": "d4496295c971",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        119
+      ]
+    },
+    {
+      "doc_id": "2a462179ef31",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        136
+      ]
+    },
+    {
+      "doc_id": "7ee7f73a34a4",
+      "category": "ADVOCATE",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        316
+      ]
+    },
+    {
+      "doc_id": "6aeb7ccc9689",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        307
+      ]
+    },
+    {
+      "doc_id": "44b78a191ad7",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        715
+      ]
+    },
+    {
+      "doc_id": "2337431bb572",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        469
+      ]
+    },
+    {
+      "doc_id": "a61fcefae9f0",
+      "category": "ADVOCATE",
+      "chunk_count": 6,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        405
+      ]
+    },
+    {
+      "doc_id": "1768b8629e86",
+      "category": "ADVOCATE",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        515
+      ]
+    },
+    {
+      "doc_id": "a91c1070d845",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        694
+      ]
+    },
+    {
+      "doc_id": "bec32c332635",
+      "category": "ADVOCATE",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        343
+      ]
+    },
+    {
+      "doc_id": "c5cd08dea686",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        171
+      ]
+    },
+    {
+      "doc_id": "d86a28aad547",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        111
+      ]
+    },
+    {
+      "doc_id": "c11b42293bf2",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        247
+      ]
+    },
+    {
+      "doc_id": "8b0457dee813",
+      "category": "ADVOCATE",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        276
+      ]
+    },
+    {
+      "doc_id": "25d165804794",
+      "category": "ADVOCATE",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        634
+      ]
+    },
+    {
+      "doc_id": "3c4aa02d2eac",
+      "category": "ADVOCATE",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        622
+      ]
+    },
+    {
+      "doc_id": "8f6082ef6182",
+      "category": "ADVOCATE",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        637
+      ]
+    },
+    {
+      "doc_id": "d6b2dc3347c8",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        488
+      ]
+    },
+    {
+      "doc_id": "14ef7073cb0a",
+      "category": "ADVOCATE",
+      "chunk_count": 24,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        202
+      ]
+    },
+    {
+      "doc_id": "df49841356b2",
+      "category": "ADVOCATE",
+      "chunk_count": 20,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        404
+      ]
+    },
+    {
+      "doc_id": "5d452d296753",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        482
+      ]
+    },
+    {
+      "doc_id": "d456b34e6966",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        198
+      ]
+    },
+    {
+      "doc_id": "3acbae022cfe",
+      "category": "ADVOCATE",
+      "chunk_count": 12,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        673
+      ]
+    },
+    {
+      "doc_id": "d52fadeefeeb",
+      "category": "ADVOCATE",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        722
+      ]
+    },
+    {
+      "doc_id": "2e7aa7db0d3e",
+      "category": "ADVOCATE",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        343
+      ]
+    },
+    {
+      "doc_id": "6fae9771da76",
+      "category": "ADVOCATE",
+      "chunk_count": 12,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        263
+      ]
+    },
+    {
+      "doc_id": "b49099533c2e",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        731
+      ]
+    },
+    {
+      "doc_id": "cb0f5e807a1a",
+      "category": "ADVOCATE",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        173
+      ]
+    },
+    {
+      "doc_id": "1555a88d2997",
+      "category": "ADVOCATE",
+      "chunk_count": 18,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        457
+      ]
+    },
+    {
+      "doc_id": "669d84c2aeb5",
+      "category": "ADVOCATE",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        229
+      ]
+    },
+    {
+      "doc_id": "39ac70841b1a",
+      "category": "ADVOCATE",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        330
+      ]
+    },
+    {
+      "doc_id": "2226f1a941a9",
+      "category": "ADVOCATE",
+      "chunk_count": 17,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        538
+      ]
+    },
+    {
+      "doc_id": "e9223c8cd940",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        190
+      ]
+    },
+    {
+      "doc_id": "963c0093ff59",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        619
+      ]
+    },
+    {
+      "doc_id": "e398a68f3b34",
+      "category": "ADVOCATE",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        413
+      ]
+    },
+    {
+      "doc_id": "349d501cb61b",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        392
+      ]
+    },
+    {
+      "doc_id": "d7a541f64a2a",
+      "category": "ADVOCATE",
+      "chunk_count": 12,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        551
+      ]
+    },
+    {
+      "doc_id": "eea4ee82ace2",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        449
+      ]
+    },
+    {
+      "doc_id": "0ebdccc6802b",
+      "category": "ADVOCATE",
+      "chunk_count": 12,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        500
+      ]
+    },
+    {
+      "doc_id": "07f6aa761f35",
+      "category": "ADVOCATE",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        442
+      ]
+    },
+    {
+      "doc_id": "1f7ac70cbe41",
+      "category": "ADVOCATE",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        709
+      ]
+    },
+    {
+      "doc_id": "775c438abb33",
+      "category": "ADVOCATE",
+      "chunk_count": 4,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        335
+      ]
+    },
+    {
+      "doc_id": "be57026a6ec5",
+      "category": "ADVOCATE",
+      "chunk_count": 3,
+      "chunk_lengths": [
+        800,
+        800,
+        439
+      ]
+    },
+    {
+      "doc_id": "84106e29ceea",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        313
+      ]
+    },
+    {
+      "doc_id": "4afed3d5aac4",
+      "category": "ADVOCATE",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        386
+      ]
+    },
+    {
+      "doc_id": "1f28411ee6db",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        601
+      ]
+    },
+    {
+      "doc_id": "b966d2f49e7d",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        326
+      ]
+    },
+    {
+      "doc_id": "0c24b3d7e6cd",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        654
+      ]
+    },
+    {
+      "doc_id": "56c4ce7afaa1",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        399
+      ]
+    },
+    {
+      "doc_id": "c961234750c3",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        792
+      ]
+    },
+    {
+      "doc_id": "8e8f9f617776",
+      "category": "ADVOCATE",
+      "chunk_count": 4,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        126
+      ]
+    },
+    {
+      "doc_id": "7542ce963ee4",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        309
+      ]
+    },
+    {
+      "doc_id": "7539af0300df",
+      "category": "ADVOCATE",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        755
+      ]
+    },
+    {
+      "doc_id": "1e6330548b66",
+      "category": "ADVOCATE",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        280
+      ]
+    },
+    {
+      "doc_id": "805a4b7916c8",
+      "category": "ADVOCATE",
+      "chunk_count": 12,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        280
+      ]
+    },
+    {
+      "doc_id": "cdae0f375f16",
+      "category": "ADVOCATE",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        241
+      ]
+    },
+    {
+      "doc_id": "5d1090bdfbec",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        621
+      ]
+    },
+    {
+      "doc_id": "be4487b0387f",
+      "category": "ADVOCATE",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        268
+      ]
+    },
+    {
+      "doc_id": "8b953bc15556",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        653
+      ]
+    },
+    {
+      "doc_id": "a9db9b187cf2",
+      "category": "ADVOCATE",
+      "chunk_count": 12,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        579
+      ]
+    },
+    {
+      "doc_id": "e0aa4417ba64",
+      "category": "ADVOCATE",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        697
+      ]
+    },
+    {
+      "doc_id": "48b25d4663c0",
+      "category": "ADVOCATE",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        239
+      ]
+    },
+    {
+      "doc_id": "030dca54563d",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        733
+      ]
+    },
+    {
+      "doc_id": "6d75ed52e26d",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        455
+      ]
+    },
+    {
+      "doc_id": "41fb3bc805ab",
+      "category": "ADVOCATE",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        390
+      ]
+    },
+    {
+      "doc_id": "c6fb70bea0b2",
+      "category": "ADVOCATE",
+      "chunk_count": 12,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        181
+      ]
+    },
+    {
+      "doc_id": "1e7d0a45aa7d",
+      "category": "ADVOCATE",
+      "chunk_count": 4,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        237
+      ]
+    },
+    {
+      "doc_id": "197246ff7ed8",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        472
+      ]
+    },
+    {
+      "doc_id": "e50b8e75683c",
+      "category": "ADVOCATE",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        198
+      ]
+    },
+    {
+      "doc_id": "7202e995f747",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        231
+      ]
+    },
+    {
+      "doc_id": "b9694a1e3b2b",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        410
+      ]
+    },
+    {
+      "doc_id": "021999b265af",
+      "category": "ADVOCATE",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        187
+      ]
+    },
+    {
+      "doc_id": "4d9d08871933",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        759
+      ]
+    },
+    {
+      "doc_id": "cb7282d26e7a",
+      "category": "ADVOCATE",
+      "chunk_count": 30,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        326
+      ]
+    },
+    {
+      "doc_id": "c9da6d25a873",
+      "category": "ADVOCATE",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        636
+      ]
+    },
+    {
+      "doc_id": "e91eb7e725ce",
+      "category": "ADVOCATE",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        338
+      ]
+    },
+    {
+      "doc_id": "488dcb9daaba",
+      "category": "ADVOCATE",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        527
+      ]
+    },
+    {
+      "doc_id": "f894394e0950",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        771
+      ]
+    },
+    {
+      "doc_id": "5906fb94c429",
+      "category": "ADVOCATE",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        180
+      ]
+    },
+    {
+      "doc_id": "ab994b066fb2",
+      "category": "ADVOCATE",
+      "chunk_count": 17,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        454
+      ]
+    },
+    {
+      "doc_id": "77f56937df6a",
+      "category": "ADVOCATE",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        600
+      ]
+    },
+    {
+      "doc_id": "ff249e4c749f",
+      "category": "ADVOCATE",
+      "chunk_count": 13,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        599
+      ]
+    },
+    {
+      "doc_id": "24fba544fda5",
+      "category": "ADVOCATE",
+      "chunk_count": 6,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        420
+      ]
+    },
+    {
+      "doc_id": "fea963e48b79",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        795
+      ]
+    },
+    {
+      "doc_id": "b91c01623a1a",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 16,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        148
+      ]
+    },
+    {
+      "doc_id": "f4f5ee8d7673",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        669
+      ]
+    },
+    {
+      "doc_id": "15d0270a8afe",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        267
+      ]
+    },
+    {
+      "doc_id": "ffa356cdd09e",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        687
+      ]
+    },
+    {
+      "doc_id": "a8bcea0167e4",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        729
+      ]
+    },
+    {
+      "doc_id": "471c79abd92f",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 5,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        611
+      ]
+    },
+    {
+      "doc_id": "886863f0312d",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 5,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        240
+      ]
+    },
+    {
+      "doc_id": "6bb30586ebea",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        478
+      ]
+    },
+    {
+      "doc_id": "3eb49f6a545a",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        101
+      ]
+    },
+    {
+      "doc_id": "6c74d8ed3242",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 4,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        171
+      ]
+    },
+    {
+      "doc_id": "14c633d31105",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 4,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        283
+      ]
+    },
+    {
+      "doc_id": "45657cc6abfc",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800
+      ]
+    },
+    {
+      "doc_id": "e7bf3cb76c30",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        247
+      ]
+    },
+    {
+      "doc_id": "710eda1fe651",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 6,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        716
+      ]
+    },
+    {
+      "doc_id": "7f9f9e94c6bf",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        144
+      ]
+    },
+    {
+      "doc_id": "1ecfccccb3af",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        607
+      ]
+    },
+    {
+      "doc_id": "1ffc15bd8928",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        659
+      ]
+    },
+    {
+      "doc_id": "8cf11781212b",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        144
+      ]
+    },
+    {
+      "doc_id": "1604c782bcd3",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 6,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        655
+      ]
+    },
+    {
+      "doc_id": "c92c2a16e22a",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 15,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        123
+      ]
+    },
+    {
+      "doc_id": "8e0d69d9ca23",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        670
+      ]
+    },
+    {
+      "doc_id": "c7c0338ec9f4",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        118
+      ]
+    },
+    {
+      "doc_id": "88851f8f3396",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        660
+      ]
+    },
+    {
+      "doc_id": "2c0a13a6a674",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        138
+      ]
+    },
+    {
+      "doc_id": "fb6231ceaab2",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        270
+      ]
+    },
+    {
+      "doc_id": "a4567e956e87",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        607
+      ]
+    },
+    {
+      "doc_id": "f1642fc3d3e9",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        352
+      ]
+    },
+    {
+      "doc_id": "2946baaad2b2",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 4,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        662
+      ]
+    },
+    {
+      "doc_id": "123e59560b6b",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 6,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        191
+      ]
+    },
+    {
+      "doc_id": "52d175c72df3",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 3,
+      "chunk_lengths": [
+        800,
+        800,
+        639
+      ]
+    },
+    {
+      "doc_id": "683d1550af88",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 4,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        668
+      ]
+    },
+    {
+      "doc_id": "ada8ac191fc9",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        489
+      ]
+    },
+    {
+      "doc_id": "939ac5dd9c95",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        703
+      ]
+    },
+    {
+      "doc_id": "e9302553aaae",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        506
+      ]
+    },
+    {
+      "doc_id": "4c60cae14d98",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        512
+      ]
+    },
+    {
+      "doc_id": "e1c5d97f3df8",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        692
+      ]
+    },
+    {
+      "doc_id": "8ea3e9563d4e",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        627
+      ]
+    },
+    {
+      "doc_id": "28ee81cd0adb",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        410
+      ]
+    },
+    {
+      "doc_id": "2211c850ec79",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        514
+      ]
+    },
+    {
+      "doc_id": "a6aa89b44960",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        184
+      ]
+    },
+    {
+      "doc_id": "1b8f56d4b272",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 14,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        319
+      ]
+    },
+    {
+      "doc_id": "1b419d12655f",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        420
+      ]
+    },
+    {
+      "doc_id": "5dd8f4fed0b3",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        346
+      ]
+    },
+    {
+      "doc_id": "82317372c1d0",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        303
+      ]
+    },
+    {
+      "doc_id": "6eb38a3b3b80",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        365
+      ]
+    },
+    {
+      "doc_id": "6e6fd36942c7",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        345
+      ]
+    },
+    {
+      "doc_id": "33c048c6cbf0",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 12,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        422
+      ]
+    },
+    {
+      "doc_id": "e0f915e00502",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        761
+      ]
+    },
+    {
+      "doc_id": "e32b70e7627c",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        306
+      ]
+    },
+    {
+      "doc_id": "8594beee638b",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 11,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        143
+      ]
+    },
+    {
+      "doc_id": "f606761688d1",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        265
+      ]
+    },
+    {
+      "doc_id": "d473702ec14a",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        546
+      ]
+    },
+    {
+      "doc_id": "ee3816e0c811",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        247
+      ]
+    },
+    {
+      "doc_id": "db6289e155b6",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        173
+      ]
+    },
+    {
+      "doc_id": "9706b53c6b9f",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        613
+      ]
+    },
+    {
+      "doc_id": "16fbb4a7c788",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        324
+      ]
+    },
+    {
+      "doc_id": "a8ab41c3b985",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        183
+      ]
+    },
+    {
+      "doc_id": "09c0aaeeba53",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 6,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        269
+      ]
+    },
+    {
+      "doc_id": "f8a5777e5b0a",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 7,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        793
+      ]
+    },
+    {
+      "doc_id": "db09827ee0bb",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        412
+      ]
+    },
+    {
+      "doc_id": "626b1b0969db",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 4,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        349
+      ]
+    },
+    {
+      "doc_id": "11ebccde2457",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 3,
+      "chunk_lengths": [
+        800,
+        800,
+        160
+      ]
+    },
+    {
+      "doc_id": "c599f062e4f5",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 6,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        204
+      ]
+    },
+    {
+      "doc_id": "39ce7de16996",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        516
+      ]
+    },
+    {
+      "doc_id": "24cb519c683a",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        130
+      ]
+    },
+    {
+      "doc_id": "33cfb9b95eff",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 12,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        469
+      ]
+    },
+    {
+      "doc_id": "305b346c05a2",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        296
+      ]
+    },
+    {
+      "doc_id": "e17a88031052",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        317
+      ]
+    },
+    {
+      "doc_id": "dc5fb8c715f1",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        720
+      ]
+    },
+    {
+      "doc_id": "604b4ff78e1c",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        450
+      ]
+    },
+    {
+      "doc_id": "47226af412ad",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 10,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        275
+      ]
+    },
+    {
+      "doc_id": "bc92ac5fca3a",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 5,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        612
+      ]
+    },
+    {
+      "doc_id": "77aa3cabdef1",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 8,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        693
+      ]
+    },
+    {
+      "doc_id": "47dc8d289dbf",
+      "category": "BUSINESS-DEVELOPMENT",
+      "chunk_count": 9,
+      "chunk_lengths": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        307
+      ]
+    }
+  ]
+}
