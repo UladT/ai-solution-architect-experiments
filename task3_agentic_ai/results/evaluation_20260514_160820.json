@@ -1,0 +1,291 @@
+[
+  {
+    "test_id": "weather_001",
+    "question": "What is the current weather in London?",
+    "category": "weather",
+    "agent_response": "The current weather in London, United Kingdom, is 9.4°C, but it feels like 6.7°C. There is slight rain with 0.4 mm of precipitation. The humidity is at 75%, and the wind is blowing at 10.4 km/h from the north (352°).",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_current_weather",
+        "args": {
+          "location": "London"
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 0.667,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 0.667,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 0.889
+  },
+  {
+    "test_id": "weather_002",
+    "question": "How is the weather in Tokyo today?",
+    "category": "weather",
+    "agent_response": "The weather in Tokyo today is mainly clear with a temperature of 14.3°C, feeling like 14.4°C. The humidity is at 86%, and there is no precipitation. Winds are light at 3.9 km/h coming from the northeast.",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_current_weather",
+        "args": {
+          "location": "Tokyo"
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 1.0,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "weather_003",
+    "question": "Give me a 3-day weather forecast for Paris.",
+    "category": "weather",
+    "agent_response": "Here is the 3-day weather forecast for Paris, France:\n\n- **May 14, 2026**:  \n  - Max Temp: 12.7°C, Min Temp: 8.1°C  \n  - Condition: Thunderstorm  \n  - Precipitation: 8.2 mm  \n  - Max Wind Speed: 14.0 km/h  \n\n- **May 15, 2026**:  \n  - Max Temp: 13.4°C, Min Temp: 6.1°C  \n  - Condition: Slight rain showers  \n  - Precipitation: 1.0 mm  \n  - Max Wind Speed: 17.7 km/h  \n\n- **May 16, 2026**:  \n  - Max Temp: 16.3°C, Min Temp: 8.1°C  \n  - Condition: Slight rain showers  \n  - Precipitation: 0.85 mm  \n  - Max Wind Speed: 11.4 km/h  ",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_weather_forecast",
+        "args": {
+          "location": "Paris",
+          "days": 3
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 1.0,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "weather_004",
+    "question": "Will it rain in Berlin tomorrow?",
+    "category": "weather",
+    "agent_response": "Yes, it is expected to rain in Berlin tomorrow, with slight rain showers and approximately 4.9 mm of precipitation. The temperature will range from 7.6°C to 13.8°C.",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_weather_forecast",
+        "args": {
+          "location": "Berlin",
+          "days": 1
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 1.0,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "weather_005",
+    "question": "What's the temperature in Sydney right now?",
+    "category": "weather",
+    "agent_response": "The current temperature in Sydney is 15.3°C, and it feels like 15.8°C. The weather is mainly clear with 90% humidity, no precipitation, and a light wind blowing at 4.9 km/h.",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_current_weather",
+        "args": {
+          "location": "Sydney"
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 1.0,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "weather_006",
+    "question": "Show me a 5-day weather forecast for New York.",
+    "category": "weather",
+    "agent_response": "Here is the 5-day weather forecast for New York:\n\n1. **May 14, 2026**:  \n   - Max Temp: 18.8°C  \n   - Min Temp: 12.3°C  \n   - Condition: Light drizzle  \n   - Precipitation: 0.4 mm  \n   - Max Wind Speed: 20.9 km/h  \n\n2. **May 15, 2026**:  \n   - Max Temp: 18.6°C  \n   - Min Temp: 10.0°C  \n   - Condition: Overcast  \n   - Precipitation: 0.0 mm  \n   - Max Wind Speed: 19.7 km/h  \n\n3. **May 16, 2026**:  \n   - Max Temp: 22.2°C  \n   - Min Temp: 12.0°C  \n   - Condition: Overcast  \n   - Precipitation: 0.0 mm  \n   - Max Wind Speed: 19.4 km/h  \n\n4. **May 17, 2026**:  \n   - Max Temp: 28.9°C  \n   - Min Temp: 17.0°C  \n   - Condition: Overcast  \n   - Precipitation: 0.0 mm  \n   - Max Wind Speed: 17.3 km/h  \n\n5. **May 18, 2026**:  \n   - Max Temp: 25.2°C  \n   - Min Temp: 17.4°C  \n   - Condition: Light drizzle  \n   - Precipitation: 0.6 mm  \n   - Max Wind Speed: 18.8 km/h  \n\nLet me know if you need further details!",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_weather_forecast",
+        "args": {
+          "location": "New York",
+          "days": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 1.0,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "news_001",
+    "question": "What are the latest news about artificial intelligence?",
+    "category": "news",
+    "agent_response": "Here are the latest news articles about artificial intelligence:\n\n1. **Cisco layoffs loom as company pivots deeper into AI after strong quarter**  \n   Cisco plans to cut fewer than 4,000 jobs as it reallocates resources toward AI following strong earnings.  \n   *Source: Fox Business, Published: May 14, 2026*  \n   [Read more](https://www.foxbusiness.com/technology/cisco-cut-thousands-jobs-ai-push-accelerates-earnings-beat)\n\n2. **Manitoba could have commissioner enforce planned social media ban for kids**  \n   Manitoba is considering appointing a commissioner to enforce a proposed ban on social media and AI chatbots for children under 16.  \n   *Source: Global News, Published: May 14, 2026*  \n   [Read more](https://globalnews.ca/news/11848676/manitoba-could-have-commissioner-enforce-planned-social-media-ban-for-kids-kinew/)\n\n3. **First responders testing AI for pediatric emergencies**  \n   Researchers in Boston are exploring how AI can assist paramedics in treating children during life-threatening emergencies.  \n   *Source: NBC10 Boston, Published: May 14, 2026*  \n   [Read more](https://www.nbcboston.com/news/local/ai-pediatric-emergency-ems-research/3949592/)\n\n4. **Chinese robot seeks religious enlightenment**  \n   A humanoid robot developed by Unitree Robotics has become a Buddhist monk in Seoul, taking part in a precept-taking ritual and adopting vows adapted for robots.  \n   *Source: Caixin, Published: May 14, 2026*  \n   [Read more](https://www.caixinglobal.com/2026-05-14/gallery-chinese-robot-seeks-religious-enlightenment-102443995.html)\n\n5. **From ChatGPT to deepfakes: Osceola schools confront AI challenges**  \n   The Osceola County School District is addressing the use and misuse of AI by students, including tools like ChatGPT and deepfakes.  \n   *Source: Around Osceola, Published: May 14, 2026*  \n   [Read more](https://www.aroundosceola.com/news/chatgpt-deepfakes-osceola-schools-confront-ai-challenges)",
+    "tool_calls_made": [
+      {
+        "tool": "news__search_news",
+        "args": {
+          "query": "artificial intelligence",
+          "language": "en",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 0.75,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 0.75,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 0.917
+  },
+  {
+    "test_id": "news_002",
+    "question": "What is happening in the world of technology today?",
+    "category": "news",
+    "agent_response": "Here are the latest updates in the world of technology:\n\n1. **Planetarium Show Creation**: Particle is working on a new planetarium show, combining science and entertainment. [Read more](https://particle.scitech.org.au/science-society/were-making-a-planetarium-show/) (Source: Scitech, May 14, 2026).\n\n2. **Google Expands Quick Share**: Google has enhanced Quick Share's AirDrop compatibility and improved the iOS-to-Android file transfer process. [Read more](https://www.hardwarezone.com.sg/mobile/smartphones/google-expands-quickshare-airdrop-compatibility) (Source: HardwareZone, May 14, 2026).\n\n3. **Nintendo Switch Online Update**: Nintendo has added five Virtual Boy titles to its Switch Online + Expansion Pack service. [Read more](https://www.nintendolife.com/news/2026/05/nintendo-expands-switch-onlines-virtual-boy-library-with-five-more-games) (Source: Nintendo Life, May 14, 2026).\n\n4. **AI and Infertility Research**: A new AI-powered wearable skin sensor patch may help detect subtle hormonal fluctuations linked to unexplained infertility. [Read more](https://www.malaymail.com/news/life/2026/05/14/ai-patch-may-unlock-hidden-clues-to-unexplained-infertility/219848) (Source: Malay Mail, May 14, 2026).\n\n5. **PlayStation Plus Games for May 2026**: The latest PlayStation Plus Extra/Deluxe games for May 2026 have been revealed, offering exciting new options for subscribers. [Read more](https://press-start.com.au/news/playstation/2026/05/14/may-2026-playstation-plus-extra-deluxe-games-have-been-revealed/) (Source: Press Start Australia, May 14, 2026).",
+    "tool_calls_made": [
+      {
+        "tool": "news__get_top_headlines",
+        "args": {
+          "category": "technology",
+          "language": "en",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 1.0,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "news_003",
+    "question": "Give me the latest business headlines.",
+    "category": "news",
+    "agent_response": "Here are the latest business headlines:\n\n1. **GE Power India Ltd Q4 2026 Earnings Call Highlights**  \n   GE Power India reports a 21% annual revenue increase and focuses on service-led growth.  \n   [Read more](https://finance.yahoo.com/markets/stocks/articles/ge-power-india-ltd-bom-010339659.html) (Source: Yahoo Finance, Published: May 14, 2026)\n\n2. **De'Longhi SpA Q1 2026 Earnings Call Highlights**  \n   De'Longhi SpA shows strong revenue growth despite geopolitical and market challenges.  \n   [Read more](https://finance.yahoo.com/markets/stocks/articles/delonghi-spa-delhf-q1-2026-010316386.html) (Source: Yahoo Finance, Published: May 14, 2026)\n\n3. **H. Lundbeck AS Q1 2026 Earnings Call Highlights**  \n   H. Lundbeck AS reports a 21% revenue increase and raises full-year guidance.  \n   [Read more](https://finance.yahoo.com/sectors/healthcare/articles/h-lundbeck-hlubf-q1-2026-010304958.html) (Source: Yahoo Finance, Published: May 14, 2026)\n\n4. **Why UBS is Still a Gold-and-Silver Fan**  \n   UBS predicts bullish trends for precious metals as Middle East conflicts wind down.  \n   [Read more](https://finance.yahoo.com/markets/commodities/articles/bubble-why-ubs-still-gold-010300030.html) (Source: Yahoo Finance, Published: May 14, 2026)\n\n5. **Eckert & Ziegler SE Q1 2026 Earnings Call Highlights**  \n   Eckert & Ziegler SE reports a 7% sales increase, driven by its medical division.  \n   [Read more](https://finance.yahoo.com/sectors/healthcare/articles/eckert-ziegler-se-xter-euz-010333179.html) (Source: Yahoo Finance, Published: May 14, 2026)",
+    "tool_calls_made": [
+      {
+        "tool": "news__get_top_headlines",
+        "args": {
+          "category": "business",
+          "language": "en",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 0.5,
+    "task_completed": true,
+    "second_attempt_run": true,
+    "improved_response_used": false,
+    "initial_keyword_score": 0.5,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 0.833
+  },
+  {
+    "test_id": "news_004",
+    "question": "What are recent news about climate change?",
+    "category": "news",
+    "agent_response": "It seems there are no recent articles available on climate change, environment, carbon, and emissions at the moment. Let me know if you'd like me to refine the search or try a different query.",
+    "tool_calls_made": [
+      {
+        "tool": "news__search_news",
+        "args": {
+          "query": "climate change environment carbon emissions",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "second_attempt_run": true,
+    "improved_response_used": true,
+    "initial_keyword_score": 0.5,
+    "improvement_delta": 0.167,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "news_005",
+    "question": "What's the latest news in science?",
+    "category": "news",
+    "agent_response": "Here are the latest science news headlines:\n\n1. **Laser Scanning Dataset Enables AI-Driven Forest Analysis**  \n   A dataset with over 10,000 annotated TLS point clouds advances precision forestry and ecological research.  \n   [Read more](https://www.azooptics.com/News.aspx?newsID=30695) (Source: AZoOptics, Published: May 14, 2026)\n\n2. **JWST Reveals a Hidden Structure in The Heart of The Squid Galaxy**  \n   The James Webb Space Telescope uncovers dramatic dust lanes and star formation pockets in a galaxy.  \n   [Read more](https://www.sciencealert.com/jwst-reveals-a-hidden-structure-in-the-heart-of-the-squid-galaxy) (Source: ScienceAlert, Published: May 14, 2026)\n\n3. **Vinegar Waste Yields Silver Nanoparticles for Food Packaging**  \n   Researchers explore using vinegar waste to create antimicrobial and antioxidant silver nanoparticles.  \n   [Read more](https://www.geneonline.com/vinegar-waste-yields-silver-nanoparticles-with-antimicrobial-and-antioxidant-properties-for-food-packaging/) (Source: GeneOnline, Published: May 14, 2026)\n\n4. **In Quantum Gravity, the Cosmological Constant May Behave Like the Quantum Hall Effect**  \n   New insights into quantum gravity suggest parallels with the quantum Hall effect.  \n   [Read more](https://phys.org/news/2026-05-quantum-gravity-cosmological-constant-similar.html) (Source: Phys.org, Published: May 14, 2026)\n\n5. **Chemists Isolate Unstable Boron Peroxide Once Thought Impossible**  \n   MIT scientists isolate a boron compound capable of transferring oxygen atoms and reacting with CO2.  \n   [Read more](https://interestingengineering.com/science/boron-peroxide-molecule-discovery) (Source: Interesting Engineering, Published: May 13, 2026)",
+    "tool_calls_made": [
+      {
+        "tool": "news__get_top_headlines",
+        "args": {
+          "category": "science",
+          "language": "en",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 0.75,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 0.75,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 0.917
+  },
+  {
+    "test_id": "news_006",
+    "question": "Tell me about recent developments in space exploration.",
+    "category": "news",
+    "agent_response": "Here are some recent developments in space exploration:\n\n1. **Artemis II Mission**: Astronauts from the Artemis II mission emphasized the importance of international collaboration in space exploration. Their journey to the far side of the moon showcased what nations can achieve together. [Read more](https://www.sootoday.com/national-news/artemis-ii-crewmates-say-space-exploration-depends-on-nations-working-together-12274289) (Published: May 13, 2026, SooToday).\n\n2. **NASA's New Space Processor**: NASA is testing a next-generation space processor that offers 500x faster performance. This chip is designed to enhance spacecraft computing, enabling autonomous missions and advanced AI for Moon and Mars exploration. [Read more](https://www.indiatvnews.com/science/nasa-brings-new-space-processor-delivering-500x-faster-performance-for-future-moon-and-mars-missions-2026-05-13-1040979) (Published: May 13, 2026, India TV News).\n\n3. **Australian Contributions to Space**: Katherine Bennell-Pegg, Australia's first astronaut and 2026 Australian of the Year, highlighted Western Australia's significant contributions to space exploration. [Read more](https://www.perthnow.com.au/wa/astronaut-and-australian-of-the-year-katherine-bennell-pegg-explores-the-future-of-space-exploration-for-wa--c-22232939) (Published: May 12, 2026, PerthNow).\n\n4. **Asteroid Apophis Mission**: The European Space Agency (ESA) and Japan Aerospace Exploration Agency (JAXA) are collaborating on the Rapid Apophis Mission for Space Safety (RAMSES) to study the near-Earth asteroid Apophis, which will pass close to Earth in 2029. [Read more](https://phys.org/news/2026-05-asteroid-apophis-skim-earth-joint.html) (Published: May 8, 2026, Phys.org).\n\nLet me know if you'd like more details on any of these topics!",
+    "tool_calls_made": [
+      {
+        "tool": "news__search_news",
+        "args": {
+          "query": "space exploration",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 0.6,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 0.6,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 0.867
+  }
+]

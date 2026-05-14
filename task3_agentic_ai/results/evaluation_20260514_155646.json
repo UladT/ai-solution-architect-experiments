@@ -1,0 +1,245 @@
+[
+  {
+    "test_id": "weather_001",
+    "question": "What is the current weather in London?",
+    "category": "weather",
+    "agent_response": "The current weather in London, United Kingdom, is 9.4°C, but it feels like 6.8°C. The humidity is 76%, and there is slight rain with 0.4 mm of precipitation. The wind is blowing at 10.1 km/h from the north-northwest (344°).",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_current_weather",
+        "args": {
+          "location": "London"
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 0.667,
+    "task_completed": true,
+    "error": null,
+    "overall_score": 0.889
+  },
+  {
+    "test_id": "weather_002",
+    "question": "How is the weather in Tokyo today?",
+    "category": "weather",
+    "agent_response": "The weather in Tokyo today is mainly clear with a temperature of 14.4°C. It feels the same at 14.4°C. The humidity is at 86%, there is no precipitation, and the wind is blowing at 4.3 km/h from the northeast.",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_current_weather",
+        "args": {
+          "location": "Tokyo"
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "weather_003",
+    "question": "Give me a 3-day weather forecast for Paris.",
+    "category": "weather",
+    "agent_response": "Here is the 3-day weather forecast for Paris, France:\n\n- **May 14, 2026**:  \n  - Condition: Thunderstorm  \n  - Max Temp: 12.7°C  \n  - Min Temp: 8.1°C  \n  - Precipitation: 8.2 mm  \n  - Max Wind Speed: 14.0 km/h  \n\n- **May 15, 2026**:  \n  - Condition: Slight rain showers  \n  - Max Temp: 13.4°C  \n  - Min Temp: 6.1°C  \n  - Precipitation: 1.0 mm  \n  - Max Wind Speed: 17.7 km/h  \n\n- **May 16, 2026**:  \n  - Condition: Slight rain showers  \n  - Max Temp: 16.3°C  \n  - Min Temp: 8.1°C  \n  - Precipitation: 0.85 mm  \n  - Max Wind Speed: 11.4 km/h  \n\nMake sure to carry an umbrella for the rainy days!",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_weather_forecast",
+        "args": {
+          "location": "Paris",
+          "days": 3
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "weather_004",
+    "question": "Will it rain in Berlin tomorrow?",
+    "category": "weather",
+    "agent_response": "Yes, it is expected to rain in Berlin tomorrow with slight rain showers. The temperature will range between 7.6°C and 13.8°C, and there will be approximately 4.9 mm of precipitation.",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_weather_forecast",
+        "args": {
+          "location": "Berlin",
+          "days": 1
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "weather_005",
+    "question": "What's the temperature in Sydney right now?",
+    "category": "weather",
+    "agent_response": "The current temperature in Sydney is 15.3°C, and it feels like 15.8°C. The weather is mainly clear with 90% humidity, no precipitation, and a light wind blowing at 4.7 km/h.",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_current_weather",
+        "args": {
+          "location": "Sydney"
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "weather_006",
+    "question": "Show me a 5-day weather forecast for New York.",
+    "category": "weather",
+    "agent_response": "Here is the 5-day weather forecast for New York:\n\n1. **May 14, 2026**:  \n   - Max Temp: 18.8°C  \n   - Min Temp: 12.3°C  \n   - Condition: Light drizzle  \n   - Precipitation: 0.4 mm  \n   - Max Wind Speed: 20.9 km/h  \n\n2. **May 15, 2026**:  \n   - Max Temp: 18.6°C  \n   - Min Temp: 10.0°C  \n   - Condition: Overcast  \n   - Precipitation: 0.0 mm  \n   - Max Wind Speed: 19.7 km/h  \n\n3. **May 16, 2026**:  \n   - Max Temp: 22.2°C  \n   - Min Temp: 12.0°C  \n   - Condition: Overcast  \n   - Precipitation: 0.0 mm  \n   - Max Wind Speed: 19.4 km/h  \n\n4. **May 17, 2026**:  \n   - Max Temp: 28.9°C  \n   - Min Temp: 17.0°C  \n   - Condition: Overcast  \n   - Precipitation: 0.0 mm  \n   - Max Wind Speed: 17.3 km/h  \n\n5. **May 18, 2026**:  \n   - Max Temp: 25.2°C  \n   - Min Temp: 17.4°C  \n   - Condition: Light drizzle  \n   - Precipitation: 0.6 mm  \n   - Max Wind Speed: 18.8 km/h  \n\nLet me know if you need further details!",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_weather_forecast",
+        "args": {
+          "location": "New York",
+          "days": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "news_001",
+    "question": "What are the latest news about artificial intelligence?",
+    "category": "news",
+    "agent_response": "Here are the latest news articles about artificial intelligence:\n\n1. **Manitoba could have commissioner enforce planned social media ban for kids**  \n   Manitoba is considering appointing a commissioner to enforce a proposed ban on social media and AI chatbots for children under 16.  \n   *Source: Global News, Published: May 14, 2026*  \n   [Read more](https://globalnews.ca/news/11848676/manitoba-could-have-commissioner-enforce-planned-social-media-ban-for-kids-kinew/)\n\n2. **First responders testing AI for pediatric emergencies**  \n   Researchers in Boston are exploring how AI could assist paramedics in treating children during life-threatening emergencies.  \n   *Source: NBC10 Boston, Published: May 14, 2026*  \n   [Read more](https://www.nbcboston.com/news/local/ai-pediatric-emergency-ems-research/3949592/)\n\n3. **Spending on AI impacts profits of China's tech giants**  \n   Companies like Alibaba, Tencent, and JD.com are increasing investments in AI, cloud infrastructure, and overseas expansion, which has affected their profits.  \n   *Source: Caixin, Published: May 14, 2026*  \n   [Read more](https://www.caixinglobal.com/2026-05-14/spending-on-ai-new-businesses-eats-into-profits-of-chinas-tech-giants-102444090.html)\n\n4. **Chinese robot becomes a Buddhist monk**  \n   A humanoid robot developed by Unitree Robotics has taken Buddhist vows in Seoul, showcasing the use of AI in religious practices.  \n   *Source: Caixin, Published: May 14, 2026*  \n   [Read more](https://www.caixinglobal.com/2026-05-14/gallery-chinese-robot-seeks-religious-enlightenment-102443995.html)\n\n5. **Osceola schools address AI challenges**  \n   The Osceola County School District is tackling issues related to the use and misuse of AI, such as ChatGPT and deepfakes, by students.  \n   *Source: Around Osceola, Published: May 14, 2026*  \n   [Read more](https://www.aroundosceola.com/news/chatgpt-deepfakes-osceola-schools-confront-ai-challenges)",
+    "tool_calls_made": [
+      {
+        "tool": "news__search_news",
+        "args": {
+          "query": "artificial intelligence",
+          "language": "en",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 0.5,
+    "task_completed": true,
+    "error": null,
+    "overall_score": 0.833
+  },
+  {
+    "test_id": "news_002",
+    "question": "What is happening in the world of technology today?",
+    "category": "news",
+    "agent_response": "Here are the latest updates in the world of technology:\n\n1. **PlayStation Plus May 2026 Games Revealed**  \n   Sony has announced the PlayStation Plus Extra/Deluxe games for May 2026, featuring an exciting lineup.  \n   [Read more](https://press-start.com.au/news/playstation/2026/05/14/may-2026-playstation-plus-extra-deluxe-games-have-been-revealed/) (Source: Press Start Australia, May 14, 2026)\n\n2. **EIZO Teases First OLED ColorEdge Monitor**  \n   EIZO is introducing its first-ever OLED ColorEdge monitor, which could set a new standard for image and video editing.  \n   [Read more](https://www.digitalcameraworld.com/tech/monitors/eizo-teases-its-first-ever-oled-coloredge-monitor) (Source: Digital Camera World, May 14, 2026)\n\n3. **Big Tech Introduces Mascots for a Friendlier Image**  \n   Companies like Apple, Microsoft, and Google are using cartoon mascots to appear more approachable and relatable.  \n   [Read more](https://nz.news.yahoo.com/why-big-tech-betting-cute-230843274.html) (Source: Yahoo News New Zealand, May 14, 2026)\n\n4. **PlayStation Plus Lineup for May**  \n   Sony's May PlayStation Plus lineup is described as \"out of this world,\" adding to gamers' excitement.  \n   [Read more](https://www.star1027.com.au/trending/gaming/a-galaxy-of-choice-mays-playstation-plus-lineup-is-out-of-this-world/) (Source: Star 1027, May 14, 2026)\n\nLet me know if you'd like more details on any of these stories!",
+    "tool_calls_made": [
+      {
+        "tool": "news__get_top_headlines",
+        "args": {
+          "category": "technology",
+          "language": "en",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "news_003",
+    "question": "Give me the latest business headlines.",
+    "category": "news",
+    "agent_response": "Here are the latest business headlines:\n\n1. **Kaynes Tech shares downgraded by JPMorgan**  \n   Negative operating cash flow reported, with management aiming for improvement by year-end.  \n   [Read more](https://www.cnbctv18.com/market/kaynes-technology-share-price-q4-result-reaction-guidance-miss-fy27-outlook-buy-sell-ws-e-19905345.htm) (Source: CNBC TV18, Published: May 14, 2026)\n\n2. **Looming Samsung walkout raises stakes**  \n   Last-ditch talks fail, increasing economic and political risks.  \n   [Read more](https://asianews.network/looming-samsung-walkout-raises-economic-political-stakes/) (Source: Asia News Network, Published: May 14, 2026)\n\n3. **BYD M9 approved for Australia**  \n   Chinese automaker targets high-end people mover segment.  \n   [Read more](https://www.carexpert.com.au/car-news/byd-m9-approved-for-australia-is-a-chinese-brand-finally-serious-about-taking-on-the-kia-carnival) (Source: CarExpert, Published: May 14, 2026)\n\n4. **LinkedIn CEO announces job cuts**  \n   Reorganization and cost-cutting measures underway at Microsoft-owned company.  \n   [Read more](https://www.sfchronicle.com/tech/article/linkedin-layoffs-tech-cuts-22257912.php) (Source: San Francisco Chronicle, Published: May 14, 2026)\n\n5. **FDA approves new leukemia treatment**  \n   Taiho Oncology's INQOVI receives approval for patients ineligible for intensive chemotherapy.  \n   [Read more](https://www.businesswire.com/news/home/20260513018065/en/U.S.-FDA-Approves-INQOVI-in-Combination-with-Venetoclax-the-First-All-Oral-Combination-Treatment-for-Patients-with-Acute-Myeloid-Leukemia-Who-Are-Ineligible-for-Intensive-Induction-Chemotherapy) (Source: Business Wire, Published: May 14, 2026)",
+    "tool_calls_made": [
+      {
+        "tool": "news__get_top_headlines",
+        "args": {
+          "category": "business",
+          "language": "en",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 0.75,
+    "task_completed": true,
+    "error": null,
+    "overall_score": 0.917
+  },
+  {
+    "test_id": "news_004",
+    "question": "What are recent news about climate change?",
+    "category": "news",
+    "agent_response": "Here are recent news articles about climate change:\n\n1. **Energy minister Dix says four new wind farms will power B.C.'s energy sovereignty**  \n   The energy and climate change minister in British Columbia announced four new wind farms to enhance the province's energy sovereignty amidst rising costs and uncertainty.  \n   Source: [BayToday](https://www.baytoday.ca/national-news/energy-minister-dix-says-four-new-wind-farms-will-power-bcs-energy-sovereignty-12278953) (Published: May 13, 2026)\n\n2. **Protected Area Managers Across Europe are Adapting to Climate Change**  \n   Protected area managers across Europe are implementing strategies to adapt to climate change, focusing on environmental preservation and resilience.  \n   Source: [Environmental News Network](https://www.enn.com/articles/77993-protected-area-managers-across-europe-are-adapting-to-climate-change) (Published: May 13, 2026)\n\nLet me know if you'd like more details!",
+    "tool_calls_made": [
+      {
+        "tool": "news__search_news",
+        "args": {
+          "query": "climate change",
+          "language": "en",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 0.5,
+    "task_completed": true,
+    "error": null,
+    "overall_score": 0.833
+  },
+  {
+    "test_id": "news_005",
+    "question": "What's the latest news in science?",
+    "category": "news",
+    "agent_response": "Here are the latest science news highlights:\n\n1. **Laser Scanning Dataset Enables AI-Driven Forest Analysis**  \n   A new dataset, TreeScanPL10K, offers over 10,000 annotated TLS point clouds, advancing precision forestry and ecological research.  \n   *Source: AZoOptics* (Published: May 14, 2026)  \n   [Read more](https://www.azooptics.com/News.aspx?newsID=30695)\n\n2. **JWST Reveals a Hidden Structure in The Heart of The Squid Galaxy**  \n   The James Webb Space Telescope uncovers a hidden structure in a galaxy with dramatic dust lanes and star formation pockets.  \n   *Source: ScienceAlert* (Published: May 14, 2026)  \n   [Read more](https://www.sciencealert.com/jwst-reveals-a-hidden-structure-in-the-heart-of-the-squid-galaxy)\n\n3. **Vinegar Waste Yields Silver Nanoparticles for Food Packaging**  \n   Researchers explore using vinegar waste to create silver nanoparticles with antimicrobial and antioxidant properties.  \n   *Source: GeneOnline* (Published: May 14, 2026)  \n   [Read more](https://www.geneonline.com/vinegar-waste-yields-silver-nanoparticles-with-antimicrobial-and-antioxidant-properties-for-food-packaging/)\n\n4. **Cosmological Constant and Quantum Hall Effect in Quantum Gravity**  \n   A study suggests the cosmological constant in quantum gravity may behave similarly to the quantum Hall effect.  \n   *Source: Phys.org* (Published: May 14, 2026)  \n   [Read more](https://phys.org/news/2026-05-quantum-gravity-cosmological-constant-similar.html)\n\n5. **Chemists Isolate Unstable Boron Peroxide**  \n   MIT scientists isolate a previously thought impossible boron compound capable of transferring oxygen atoms and reacting with CO2.  \n   *Source: Interesting Engineering* (Published: May 13, 2026)  \n   [Read more](https://interestingengineering.com/science/boron-peroxide-molecule-discovery)",
+    "tool_calls_made": [
+      {
+        "tool": "news__get_top_headlines",
+        "args": {
+          "category": "science",
+          "language": "en",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "news_006",
+    "question": "Tell me about recent developments in space exploration.",
+    "category": "news",
+    "agent_response": "Here are some recent developments in space exploration:\n\n1. **Artemis II Mission**: Astronauts from the Artemis II mission emphasized the importance of international collaboration in space exploration. Their journey to the far side of the Moon showcased what nations can achieve together ([SooToday](https://www.sootoday.com/national-news/artemis-ii-crewmates-say-space-exploration-depends-on-nations-working-together-12274289), May 13, 2026).\n\n2. **NASA's New Space Processor**: NASA is testing a next-generation space processor that offers 500x faster performance. This chip is designed to enhance spacecraft computing, enabling autonomous missions, advanced AI, and faster scientific discoveries for Moon and Mars exploration ([India TV News](https://www.indiatvnews.com/science/nasa-brings-new-space-processor-delivering-500x-faster-performance-for-future-moon-and-mars-missions-2026-05-13-1040979), May 13, 2026).\n\n3. **Australian Contributions to Space**: Katherine Bennell-Pegg, Australia's first astronaut and 2026 Australian of the Year, highlighted Western Australia's critical role in advancing space exploration ([PerthNow](https://www.perthnow.com.au/wa/astronaut-and-australian-of-the-year-katherine-bennell-pegg-explores-the-future-of-space-exploration-for-wa--c-22232939), May 12, 2026).\n\n4. **Asteroid Apophis Mission**: The European Space Agency (ESA) and Japan Aerospace Exploration Agency (JAXA) are collaborating on the Rapid Apophis Mission for Space Safety (RAMSES). This mission will monitor the near-Earth asteroid Apophis as it passes close to Earth in 2029 ([Phys.org](https://phys.org/news/2026-05-asteroid-apophis-skim-earth-joint.html), May 8, 2026).\n\nLet me know if you'd like more details on any of these topics!",
+    "tool_calls_made": [
+      {
+        "tool": "news__search_news",
+        "args": {
+          "query": "space exploration",
+          "language": "en",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 0.6,
+    "task_completed": true,
+    "error": null,
+    "overall_score": 0.867
+  }
+]

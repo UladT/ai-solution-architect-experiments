@@ -10,6 +10,7 @@ Requires: GNEWS_API_KEY in .env  (free key at https://gnews.io)
 
 import json
 import os
+import re
 import httpx
 from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
@@ -46,6 +47,12 @@ async def search_news(
     """
     if not _API_KEY:
         return json.dumps({"error": "GNEWS_API_KEY is not set. Add it to .env."})
+
+    query = (query or "").strip()[:120]
+    if not query:
+        return json.dumps({"error": "Query must be a non-empty string."})
+    if not re.fullmatch(r"[A-Za-z0-9 .,'-]{1,120}", query):
+        return json.dumps({"error": "Query contains unsupported characters."})
 
     max_articles = max(1, min(10, int(max_articles)))
 

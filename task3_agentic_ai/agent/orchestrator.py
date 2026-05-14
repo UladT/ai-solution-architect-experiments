@@ -13,13 +13,15 @@ from openai import AzureOpenAI
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 
+from security_guard import SecurityGuard
+
 SERVERS_DIR = Path(__file__).parent.parent / "mcp_servers"
 
 SYSTEM_PROMPT = (
     "You are a helpful assistant with access to real-time weather data "
     "and the latest news.\n"
     "- For weather questions, always use the weather tools and include "
-    "temperature (°C), conditions, and other relevant details.\n"
+    "temperature (C), conditions, and other relevant details.\n"
     "- For news questions, use the news tools and summarise key headlines "
     "with sources and dates.\n"
     "- Always call a tool before answering; never fabricate weather or news data.\n"
@@ -33,8 +35,8 @@ class AgentOrchestrator:
     """
     Orchestrates an Azure OpenAI agent with weather and news MCP tools.
 
-    After each call to `query()`, the list of tool calls made is available
-    at `self.last_tool_calls` for evaluation purposes.
+    After each call to query(), the list of tool calls made is available
+    at self.last_tool_calls for evaluation purposes.
     """
 
     def __init__(self, config) -> None:
@@ -44,11 +46,9 @@ class AgentOrchestrator:
             api_version=config.azure_openai_api_version,
             azure_endpoint=config.azure_openai_endpoint,
         )
+        self.security_guard = SecurityGuard()
         self.last_tool_calls: list[dict] = []
-
-    # ------------------------------------------------------------------ #
-    # Public API                                                           #
-    # ------------------------------------------------------------------ #
+        self.last_security_report: dict = {}
 
     async def query(self, question: str, verbose: bool = False) -> str:
         """
@@ -56,12 +56,28 @@ class AgentOrchestrator:
 
         Args:
             question: User question about weather or news.
-            verbose:  Print tool-call details to stdout.
+            verbose: Print tool-call details to stdout.
 
         Returns:
             Final natural-language answer from the LLM.
         """
         self.last_tool_calls = []
+
+        input_decision = self.security_guard.validate_input(question)
+        self.last_security_report = {
+            "input_safe": input_decision.is_safe,
+            "blocked": input_decision.blocked,
+            "threats_found": input_decision.threats_found,
+            "warnings": input_decision.warnings,
+            "output_issues": [],
+        }
+
+        if input_decision.blocked:
+            return (
+                "I cannot process that request because it appears to contain "
+                "unsafe or prompt-injection content. Please ask a normal "
+                "weather or news question."
+            )
 
         weather_params = StdioServerParameters(
             command=sys.executable,
@@ -80,13 +96,17 @@ class AgentOrchestrator:
                     async with ClientSession(nr, nw) as news_session:
                         await news_session.initialize()
 
-                        return await self._agent_loop(
-                            question, weather_session, news_session, verbose
+                        raw_answer = await self._agent_loop(
+                            input_decision.sanitized_question,
+                            weather_session,
+                            news_session,
+                            verbose,
                         )
-
-    # ------------------------------------------------------------------ #
-    # Internal agent loop                                                  #
-    # ------------------------------------------------------------------ #
+                        safe_answer, output_issues = self.security_guard.validate_output(
+                            raw_answer
+                        )
+                        self.last_security_report["output_issues"] = output_issues
+                        return safe_answer
 
     async def _agent_loop(
         self,
@@ -120,60 +140,57 @@ class AgentOrchestrator:
 
             choice = response.choices[0]
 
-            # Final answer – no more tool calls
             if choice.finish_reason == "stop":
                 return choice.message.content or ""
 
-            # Tool calls requested
             if choice.finish_reason == "tool_calls":
                 tool_calls = choice.message.tool_calls or []
 
-                # Append assistant message (must include tool_calls field)
-                messages.append({
-                    "role": "assistant",
-                    "content": choice.message.content,
-                    "tool_calls": [
-                        {
-                            "id": tc.id,
-                            "type": "function",
-                            "function": {
-                                "name": tc.function.name,
-                                "arguments": tc.function.arguments,
-                            },
-                        }
-                        for tc in tool_calls
-                    ],
-                })
+                messages.append(
+                    {
+                        "role": "assistant",
+                        "content": choice.message.content,
+                        "tool_calls": [
+                            {
+                                "id": tc.id,
+                                "type": "function",
+                                "function": {
+                                    "name": tc.function.name,
+                                    "arguments": tc.function.arguments,
+                                },
+                            }
+                            for tc in tool_calls
+                        ],
+                    }
+                )
 
                 for tc in tool_calls:
                     tool_name = tc.function.name
-                    args = json.loads(tc.function.arguments)
+                    try:
+                        args = json.loads(tc.function.arguments)
+                    except json.JSONDecodeError:
+                        args = {}
 
                     if verbose:
-                        print(f"  → {tool_name}({args})")
+                        print(f"  -> {tool_name}({args})")
 
                     self.last_tool_calls.append({"tool": tool_name, "args": args})
 
-                    # Route to the correct MCP server
-                    tool_result = await self._call_tool(
-                        tool_name, args, tool_routes
-                    )
+                    tool_result = await self._call_tool(tool_name, args, tool_routes)
 
                     if verbose:
                         preview = tool_result[:120].replace("\n", " ")
-                        print(f"  ← {preview}…")
+                        print(f"  <- {preview}...")
 
-                    messages.append({
-                        "role": "tool",
-                        "tool_call_id": tc.id,
-                        "content": tool_result,
-                    })
+                    messages.append(
+                        {
+                            "role": "tool",
+                            "tool_call_id": tc.id,
+                            "content": tool_result,
+                        }
+                    )
 
         return "Could not produce an answer within the iteration limit."
-
-    # ------------------------------------------------------------------ #
-    # Helpers                                                              #
-    # ------------------------------------------------------------------ #
 
     @staticmethod
     async def _build_tool_registry(
@@ -183,7 +200,7 @@ class AgentOrchestrator:
         """
         Gather tools from both MCP servers and build:
         - openai_tools: list of tool dicts in OpenAI function-calling format
-        - tool_routes:  mapping from namespaced tool name to (session, raw_name)
+        - tool_routes: mapping from namespaced tool name to (session, raw_name)
         """
         openai_tools: list[dict] = []
         tool_routes: dict[str, tuple[ClientSession, str]] = {}
@@ -191,27 +208,31 @@ class AgentOrchestrator:
         weather_tools = await weather_session.list_tools()
         for t in weather_tools.tools:
             namespaced = f"weather__{t.name}"
-            openai_tools.append({
-                "type": "function",
-                "function": {
-                    "name": namespaced,
-                    "description": t.description,
-                    "parameters": t.inputSchema,
-                },
-            })
+            openai_tools.append(
+                {
+                    "type": "function",
+                    "function": {
+                        "name": namespaced,
+                        "description": t.description,
+                        "parameters": t.inputSchema,
+                    },
+                }
+            )
             tool_routes[namespaced] = (weather_session, t.name)
 
         news_tools = await news_session.list_tools()
         for t in news_tools.tools:
             namespaced = f"news__{t.name}"
-            openai_tools.append({
-                "type": "function",
-                "function": {
-                    "name": namespaced,
-                    "description": t.description,
-                    "parameters": t.inputSchema,
-                },
-            })
+            openai_tools.append(
+                {
+                    "type": "function",
+                    "function": {
+                        "name": namespaced,
+                        "description": t.description,
+                        "parameters": t.inputSchema,
+                    },
+                }
+            )
             tool_routes[namespaced] = (news_session, t.name)
 
         return openai_tools, tool_routes

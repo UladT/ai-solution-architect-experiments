@@ -8,6 +8,7 @@ MCP transport:   stdio (default)
 
 import asyncio
 import json
+import re
 import httpx
 from mcp.server.fastmcp import FastMCP
 
@@ -34,6 +35,13 @@ WEATHER_CODES: dict[int, str] = {
 
 async def _geocode(location: str) -> dict:
     """Resolve a city/location name to latitude and longitude."""
+    if not isinstance(location, str) or not location.strip():
+        raise ValueError("Location must be a non-empty string.")
+
+    location = location.strip()[:100]
+    if not re.fullmatch(r"[A-Za-z0-9 .,'-]{1,100}", location):
+        raise ValueError("Location contains unsupported characters.")
+
     async with httpx.AsyncClient(timeout=10.0) as client:
         resp = await client.get(
             GEOCODING_URL,
