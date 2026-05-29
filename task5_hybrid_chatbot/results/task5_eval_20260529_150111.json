@@ -1,0 +1,89 @@
+{
+  "metrics": {
+    "m1_tool_selection_accuracy": 1.0,
+    "m2_avg_keyword_score": 1.0,
+    "m3_task_completion_rate": 1.0,
+    "m4_improvement_success_rate": 0.0,
+    "improvement_attempts": 0
+  },
+  "results": [
+    {
+      "test_id": "rag_001",
+      "question": "Find Python developers with FastAPI and Django experience",
+      "category": "rag",
+      "expected_tool_prefix": "rag__",
+      "actual_tool_prefix": "rag__",
+      "tool_selection_correct": true,
+      "keyword_score": 1.0,
+      "completion_ok": true,
+      "second_attempt": false,
+      "improved": false,
+      "final_answer": "Here are Python developers with experience in FastAPI and Django:\n\n1. **Alex Johnson**  \n   - **Role**: Python Developer  \n   - **Email**: alex.j@email.com  \n   - **Experience**: 4 years in Python software development.  \n   - **Key Skills**: Built scalable REST APIs with Django and FastAPI, PostgreSQL, Redis caching, Celery task queues, Microservices.  \n   - **Previous Role**: Senior Python Developer at WebStartup (2020-2024).  \n\n2. **Maria Rodriguez**  \n   - **Role**: Backend Developer  \n   - **Email**: m.rodriguez@email.com  \n   - **Experience**: 6 years in backend Python development.  \n   - **Key Skills**: Designed high-throughput payment processing systems using Python, Django REST Framework, PostgreSQL optimization.  \n   - **Previous Role**: Lead Developer at FinTech Inc (2018-2024).  \n\nLet me know if you'd like further details or assistance!"
+    },
+    {
+      "test_id": "rag_002",
+      "question": "Show machine learning candidates with TensorFlow",
+      "category": "rag",
+      "expected_tool_prefix": "rag__",
+      "actual_tool_prefix": "rag__",
+      "tool_selection_correct": true,
+      "keyword_score": 1.0,
+      "completion_ok": true,
+      "second_attempt": false,
+      "improved": false,
+      "final_answer": "Here are machine learning candidates with TensorFlow experience:\n\n1. **John Smith**  \n   - **Role**: Data Scientist  \n   - **Email**: john.smith@email.com  \n   - **Phone**: +1-555-0101  \n   - **Experience**: 5 years in data science and machine learning.  \n   - **Highlights**: Senior Data Scientist at TechCorp (2020-2024), led ML pipeline development using Python, TensorFlow, PyTorch, and scikit-learn. Built recommendation systems.\n\n2. **Emily Chen**  \n   - **Role**: ML Engineer  \n   - **Email**: emily.chen@email.com  \n   - **Phone**: +1-555-0102  \n   - **Experience**: 3 years in ML engineering.  \n   - **Highlights**: ML Engineer at DataCo (2021-2024), deployed and monitored ML models in production. Skilled in Python, machine learning, deep learning with Keras and PyTorch, feature engineering, and model optimization.\n\nLet me know if you'd like more details or additional candidates!"
+    },
+    {
+      "test_id": "weather_001",
+      "question": "What is the weather in London today?",
+      "category": "weather",
+      "expected_tool_prefix": "weather__",
+      "actual_tool_prefix": "weather__",
+      "tool_selection_correct": true,
+      "keyword_score": 1.0,
+      "completion_ok": true,
+      "second_attempt": false,
+      "improved": false,
+      "final_answer": "The current weather in London, United Kingdom, is as follows:\n\n- **Temperature**: 23.9\u00b0C (Feels like 23.5\u00b0C)\n- **Condition**: Overcast\n- **Humidity**: 40%\n- **Precipitation**: 0.0 mm\n- **Wind**: 10.1 km/h from 293\u00b0 (northwest)\n\nLet me know if you need more details!"
+    },
+    {
+      "test_id": "news_001",
+      "question": "What are the latest news about artificial intelligence?",
+      "category": "news",
+      "expected_tool_prefix": "news__",
+      "actual_tool_prefix": "news__",
+      "tool_selection_correct": true,
+      "keyword_score": 1.0,
+      "completion_ok": true,
+      "second_attempt": false,
+      "improved": false,
+      "final_answer": "Here are the latest news articles about artificial intelligence:\n\n1. **[How Anthropic became world's most valuable AI startup, surpassing OpenAI with $965 billion valuation](https://www.livemint.com/companies/news/how-anthropic-became-worlds-most-valuable-ai-startup-surpassing-openai-with-965-billion-valuation-11780010648713.html)**  \n   *Published by Livemint on May 28, 2026*  \n   Dario Amodei's San Francisco-based AI company, Anthropic, is now valued at $965 billion, surpassing OpenAI's $730 billion valuation in one of the largest private funding rounds in technology history.\n\n2. **[AI and drones can help improve early warning systems for Vibrio bacteria in the Baltic Sea](https://phys.org/news/2026-05-ai-drones-early-vibrio-bacteria.html)**  \n   *Published by Phys.org on May 28, 2026*  \n   Researchers have developed an AI-based system that, combined with drones, can predict the presence of the dangerous Vibrio bacteria in the Baltic Sea up to five weeks in advance.\n\n3. **[Teachers Union Chief Weingarten Calls for Limits on AI, Screen Time in Schools](https://www.newsmax.com/newsfront/randi-weingarten-artificial-intelligence-teachers-union/2026/05/28/id/1257854/)**  \n   *Published by Newsmax on May 28, 2026*  \n   The American Federation of Teachers President, Randi Weingarten, is advocating for restrictions on AI tools and excessive screen time in schools, citing concerns over children's education and mental health.\n\n4. **[At UMass graduation, diversity and artificial intelligence took center stage](https://www.bostonglobe.com/2026/05/28/metro/umass-boston-commencement-sees-2740-graduates-in-2026/)**  \n   *Published by The Boston Globe on May 28, 2026*  \n   The UMass Boston commencement ceremony highlighted themes of diversity and the role of artificial intelligence, as over 2,000 students graduated.\n\n5. **[California tech startup Webflow lays off most of its staff due to AI](https://nypost.com/2026/05/28/tech/bloodbath-at-california-tech-startup-as-staff-locked-out-without-warning/)**  \n   *Published by New York Post on May 28, 2026*  \n   Webflow, a California-based tech startup, has laid off most of its staff without warning, citing disruptions caused by advancements in artificial intelligence.\n\nLet me know if you'd like more details on any of these stories!"
+    },
+    {
+      "test_id": "disaster_001",
+      "question": "Top flood disasters in India since 2000 by total deaths",
+      "category": "disaster",
+      "expected_tool_prefix": "disaster__",
+      "actual_tool_prefix": "disaster__",
+      "tool_selection_correct": true,
+      "keyword_score": 1.0,
+      "completion_ok": true,
+      "second_attempt": false,
+      "improved": false,
+      "final_answer": "The top flood disasters in India since 2000 by total deaths are:\n\n1. **2013 Flood**: Total deaths - 6,054\n2. **2020 Flood**: Total deaths - 1,922\n3. **2019 Flood**: Total deaths - 1,900\n\nThese events highlight the significant impact of flooding in India during these years."
+    },
+    {
+      "test_id": "disaster_002",
+      "question": "Summarize earthquake disasters in Japan between 1990 and 2021",
+      "category": "disaster",
+      "expected_tool_prefix": "disaster__",
+      "actual_tool_prefix": "disaster__",
+      "tool_selection_correct": true,
+      "keyword_score": 1.0,
+      "completion_ok": true,
+      "second_attempt": false,
+      "improved": false,
+      "final_answer": "Between 1990 and 2021, Japan experienced 68 earthquake disasters, resulting in a total of 51,158 deaths and affecting approximately 3,172,898 people.\n\nKey events include:\n\n1. **2021**: Multiple earthquakes with ground movement were recorded. One event affected 611 people, while another caused 1 death and affected 7,892 people.\n2. **2019**: Earthquakes affected 460 people in separate incidents.\n3. **2018**: Significant earthquakes caused 41 deaths and affected 6,280 people in one event, and 5 deaths with 20,715 people affected in another.\n\nThese events highlight the recurring impact of earthquakes in Japan over the years."
+    }
+  ]
+}
