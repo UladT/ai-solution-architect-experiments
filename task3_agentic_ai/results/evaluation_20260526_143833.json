@@ -1,0 +1,292 @@
+[
+  {
+    "test_id": "weather_001",
+    "question": "What is the current weather in London?",
+    "category": "weather",
+    "agent_response": "The current weather in London, United Kingdom, is 32.1°C, feeling like 33.3°C. The sky is clear, with no precipitation. Humidity is at 26%, and there is a light wind blowing at 5.4 km/h from the southwest (228°).",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_current_weather",
+        "args": {
+          "location": "London"
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 0.667,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 0.667,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 0.889
+  },
+  {
+    "test_id": "weather_002",
+    "question": "How is the weather in Tokyo today?",
+    "category": "weather",
+    "agent_response": "The weather in Tokyo today is mainly clear with a temperature of 20.5°C, feeling like 22.5°C. Humidity is at 84%, and there is no precipitation. The wind is blowing at 4.7 km/h from the southeast (122°).",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_current_weather",
+        "args": {
+          "location": "Tokyo"
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 1.0,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "weather_003",
+    "question": "Give me a 3-day weather forecast for Paris.",
+    "category": "weather",
+    "agent_response": "Here is the 3-day weather forecast for Paris, France:\n\n- **May 26, 2026**: Clear sky with a high of 33.3°C and a low of 19.0°C. No precipitation expected. Maximum wind speed: 10.9 km/h.\n- **May 27, 2026**: Overcast with a high of 32.9°C and a low of 20.4°C. No precipitation expected. Maximum wind speed: 11.0 km/h.\n- **May 28, 2026**: Overcast with a high of 32.9°C and a low of 20.7°C. No precipitation expected. Maximum wind speed: 10.1 km/h.",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_weather_forecast",
+        "args": {
+          "location": "Paris",
+          "days": 3
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 1.0,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "weather_004",
+    "question": "Will it rain in Berlin tomorrow?",
+    "category": "weather",
+    "agent_response": "No, it will not rain in Berlin tomorrow. The weather is expected to be clear with a high of 30.3°C and a low of 15.7°C.",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_weather_forecast",
+        "args": {
+          "location": "Berlin",
+          "days": 1
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 0.667,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 0.667,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 0.889
+  },
+  {
+    "test_id": "weather_005",
+    "question": "What's the temperature in Sydney right now?",
+    "category": "weather",
+    "agent_response": "The current temperature in Sydney is 16.5°C, but it feels like 17.8°C. The weather condition is dense drizzle, with a humidity of 99% and a light wind blowing at 6.2 km/h. There has been a slight precipitation of 0.3 mm.",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_current_weather",
+        "args": {
+          "location": "Sydney"
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 1.0,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "weather_006",
+    "question": "Show me a 5-day weather forecast for New York.",
+    "category": "weather",
+    "agent_response": "Here is the 5-day weather forecast for New York:\n\n1. **May 26, 2026**: Max Temp: 26.5°C, Min Temp: 14.5°C, Condition: Overcast, Precipitation: 0.0 mm, Wind Speed: 12.3 km/h.\n2. **May 27, 2026**: Max Temp: 31.4°C, Min Temp: 17.8°C, Condition: Overcast, Precipitation: 0.0 mm, Wind Speed: 21.0 km/h.\n3. **May 28, 2026**: Max Temp: 24.0°C, Min Temp: 17.8°C, Condition: Light drizzle, Precipitation: 0.1 mm, Wind Speed: 22.0 km/h.\n4. **May 29, 2026**: Max Temp: 23.8°C, Min Temp: 14.4°C, Condition: Overcast, Precipitation: 0.0 mm, Wind Speed: 28.0 km/h.\n5. **May 30, 2026**: Max Temp: 17.1°C, Min Temp: 11.1°C, Condition: Overcast, Precipitation: 0.0 mm, Wind Speed: 32.0 km/h.",
+    "tool_calls_made": [
+      {
+        "tool": "weather__get_weather_forecast",
+        "args": {
+          "location": "New York",
+          "days": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 1.0,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "news_001",
+    "question": "What are the latest news about artificial intelligence?",
+    "category": "news",
+    "agent_response": "Here are the latest news articles about artificial intelligence:\n\n1. **AI-powered tool to screen for latent TB**  \n   Thailand's public health sector is using AI and portable diagnostic technology to combat latent tuberculosis with a system called \"SERS-TB\".  \n   Source: Bangkok Post (Published: May 25, 2026)  \n   [Read more](https://www.bangkokpost.com/thailand/general/3260849/aipowered-tool-to-screen-for-latent-tb)\n\n2. **Rachel Reeves tells cabinet to buy British for key industries**  \n   The UK chancellor is focusing on shipbuilding, steelmaking, energy, and AI for domestic deals.  \n   Source: The Sunday Times (Published: May 25, 2026)  \n   [Read more](https://www.thetimes.com/uk/politics/article/rachel-reeves-buy-british-shipbuilding-steel-2wxfgl5v5)\n\n3. **Prof Adit brings global recognition to MIER Group**  \n   Prof Adit Gupta presented cutting-edge research on AI and education at an international conference in Hong Kong.  \n   Source: Daily Excelsior (Published: May 25, 2026)  \n   [Read more](https://www.dailyexcelsior.com/prof-adit-brings-global-recognition-to-mier-group/)\n\n4. **Pope calls for robust regulation of AI**  \n   Pope Leo XIV issued a manifesto urging AI developers to prioritize humanity's welfare over profit.  \n   Source: Daily Excelsior (Published: May 25, 2026)  \n   [Read more](https://www.dailyexcelsior.com/pope-calls-for-robust-regulation-of-ai-in-manifesto-that-ponders-future-of-humanity/)\n\n5. **AI growth puts 8.7m Thai jobs at risk**  \n   Generative AI could impact nearly 9 million workers in Thailand, according to the NESDC.  \n   Source: Bangkok Post (Published: May 25, 2026)  \n   [Read more](https://www.bangkokpost.com/business/general/3260964/ai-growth-puts-87m-thai-jobs-at-risk)",
+    "tool_calls_made": [
+      {
+        "tool": "news__search_news",
+        "args": {
+          "query": "artificial intelligence",
+          "language": "en",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 0.75,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 0.75,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 0.917
+  },
+  {
+    "test_id": "news_002",
+    "question": "What is happening in the world of technology today?",
+    "category": "news",
+    "agent_response": "Here are the latest updates in the world of technology:\n\n1. **Google System Updates for May 2026**  \n   Google has released its May 2026 system updates, detailing new features in Play services, Play Store, and system updates.  \n   [Read more on 9to5Google](https://9to5google.com/2026/05/25/may-2026-google-system-updates/)\n\n2. **Early EOFY Sales on Tech and More**  \n   Early End of Financial Year (EOFY) sales are offering discounts of up to $650 on tech, home appliances, and fashion.  \n   [Read more on Nine.com.au](https://www.nine.com.au/product-reviews/deals/sales-of-the-week-best-deals-list-may-25-to-june-1-2026/5a4ad038-05f2-474e-9dfa-07e86be15770)\n\n3. **Best Bouldering Shoes of 2026**  \n   A review of 17 climbing shoes has identified the top 6 for indoor and outdoor bouldering, focusing on factors like durability and precision.  \n   [Read more on Treeline Review](https://www.treelinereview.com/gearreviews/best-bouldering-shoes)\n\n4. **Rethinking Customer Loyalty Programs**  \n   An opinion piece argues that brands should focus on building trust, ease, and consistency rather than just offering rewards in loyalty programs.  \n   [Read more on afaqs!](https://www.afaqs.com/news/guest-article/beyond-points-why-i-believe-loyalty-was-never-meant-to-be-a-programme-11874094)\n\nLet me know if you'd like more details on any of these stories!",
+    "tool_calls_made": [
+      {
+        "tool": "news__get_top_headlines",
+        "args": {
+          "category": "technology",
+          "language": "en",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 1.0,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "news_003",
+    "question": "Give me the latest business headlines.",
+    "category": "news",
+    "agent_response": "Here are the latest business headlines:\n\n1. **Conrad Asia Energy Ltd.'s (ASX:CRD) Shift From Loss To Profit**  \n   Analysis of Conrad Asia Energy's transition from loss to profit.  \n   [Read more](https://simplywall.st/stocks/au/energy/asx-crd/conrad-asia-energy-shares/news/conrad-asia-energy-ltds-asxcrd-shift-from-loss-to-profit) (Source: Simply Wall St, May 25, 2026)\n\n2. **Eli Lilly Just Got a Huge Vote of Confidence From Morgan Stanley**  \n   Focus on the efficacy of Eli Lilly's new GLP-1 drug and its older products.  \n   [Read more](https://finance.yahoo.com/sectors/healthcare/articles/eli-lilly-just-got-huge-233500857.html) (Source: Yahoo Finance, May 25, 2026)\n\n3. **Refined Energy Corp. Announces Director Resignation**  \n   Announcement of Ken Wheatley's resignation from the company's board.  \n   [Read more](https://www.manilatimes.net/2026/05/26/tmt-newswire/globenewswire/refined-energy-corp-announces-director-resignation/2351234) (Source: The Manila Times, May 25, 2026)\n\n4. **King Salmon Returns to Profit**  \n   Revenue increased to $100.3M, driven by higher sales volumes and improved pricing.  \n   [Read more](https://www.rnz.co.nz/news/business/596362/king-salmon-returns-to-profit) (Source: RNZ, May 25, 2026)\n\n5. **Global Markets Soar but the Rally Belongs to Just a Few Stocks**  \n   Market gains driven by a few heavyweight stocks despite record-high indices.  \n   [Read more](https://www.moneycontrol.com/news/business/earnings/global-markets-soar-but-the-rally-belongs-to-just-a-few-stocks-13930376.html) (Source: Moneycontrol.com, May 25, 2026)",
+    "tool_calls_made": [
+      {
+        "tool": "news__get_top_headlines",
+        "args": {
+          "category": "business",
+          "language": "en",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 0.75,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 0.75,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 0.917
+  },
+  {
+    "test_id": "news_004",
+    "question": "What are recent news about climate change?",
+    "category": "news",
+    "agent_response": "There are currently no specific articles available on recent news about climate change, environment, carbon, and emissions. Let me know if you'd like me to refine the search or try a different query.",
+    "tool_calls_made": [
+      {
+        "tool": "news__search_news",
+        "args": {
+          "query": "climate change environment carbon emissions",
+          "language": "en",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 1.0,
+    "task_completed": true,
+    "second_attempt_run": true,
+    "improved_response_used": true,
+    "initial_keyword_score": 0.25,
+    "improvement_delta": 0.25,
+    "error": null,
+    "overall_score": 1.0
+  },
+  {
+    "test_id": "news_005",
+    "question": "What's the latest news in science?",
+    "category": "news",
+    "agent_response": "Here are the latest science news highlights:\n\n1. **New Deep-Sea Snailfish Species Discovered**  \n   Scientists have identified three new species of deep-sea snailfish thousands of feet below California's coast, showcasing the hidden diversity of the Pacific Ocean.  \n   [Read more](https://indiandefencereview.com/scientists-new-deep-sea-snailfish-species/) (Published: May 25, 2026)\n\n2. **Why Did T. Rex Have Tiny Arms?**  \n   A new study may have solved the mystery of the Tyrannosaurus rex's small arms, shedding light on their evolutionary purpose.  \n   [Read more](https://www.ksl.com/article/51502224/why-did-t-rex-have-tiny-arms-a-new-study-may-finally-have-the-answer) (Published: May 25, 2026)\n\n3. **Rare Dinosaur Fossil Found in Canada**  \n   Paleontologists discovered a rare ostrich-like dinosaur fossil on a Canadian island, providing evidence of bird-like dinosaurs on the ancient Pacific coastline.  \n   [Read more](https://www.sci.news/paleontology/denman-island-ornithomimosaur-14794.html) (Published: May 25, 2026)\n\n4. **Supermassive Black Holes and Exoplanet Habitability**  \n   Research reveals that supermassive black holes can make exoplanets uninhabitable, even at great distances, by affecting their environments.  \n   [Read more](https://phys.org/news/2026-05-supermassive-black-holes-exoplanets-uninhabitable.html) (Published: May 25, 2026)\n\n5. **Mars as a Model for Studying Exoplanets**  \n   Scientists suggest studying Mars to better understand the habitability of rocky exoplanets, focusing on factors like tectonic activity and atmospheric escape.  \n   [Read more](https://www.universetoday.com/articles/how-mars-can-help-us-understand-marginal-exoplanets) (Published: May 25, 2026)",
+    "tool_calls_made": [
+      {
+        "tool": "news__get_top_headlines",
+        "args": {
+          "category": "science",
+          "language": "en",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 0.75,
+    "task_completed": true,
+    "second_attempt_run": false,
+    "improved_response_used": false,
+    "initial_keyword_score": 0.75,
+    "improvement_delta": 0.0,
+    "error": null,
+    "overall_score": 0.917
+  },
+  {
+    "test_id": "news_006",
+    "question": "Tell me about recent developments in space exploration.",
+    "category": "news",
+    "agent_response": "There are no recent articles available on space exploration, NASA, rockets, or missions at the moment. Let me know if you'd like me to refine the search or explore a specific aspect further.",
+    "tool_calls_made": [
+      {
+        "tool": "news__search_news",
+        "args": {
+          "query": "space exploration NASA rocket mission",
+          "max_articles": 5
+        }
+      }
+    ],
+    "tool_selection_correct": true,
+    "keyword_score": 0.8,
+    "task_completed": true,
+    "second_attempt_run": true,
+    "improved_response_used": true,
+    "initial_keyword_score": 0.4,
+    "improvement_delta": 0.133,
+    "error": null,
+    "overall_score": 0.933
+  }
+]
